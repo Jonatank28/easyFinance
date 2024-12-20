@@ -7,7 +7,6 @@ import { useOAuth } from '@clerk/clerk-expo';
 
 WebBrowser.maybeCompleteAuthSession();
 
-
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const googleOAuth = useOAuth({ strategy: 'oauth_google' });

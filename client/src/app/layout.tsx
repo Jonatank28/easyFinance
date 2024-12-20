@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "@/styles/globals.css";
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
+import Providers from "@/components/Providers";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -21,17 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="pt-BR">
+      <html lang="pt-BR" suppressHydrationWarning>
         <body className={`${mulish.variable} font-sans antialiased`}>
-          <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
-          <main>{children}</main>
+          <Providers>
+            <main>{children}</main>
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
