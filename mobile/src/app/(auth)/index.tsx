@@ -10,6 +10,7 @@ const home = () => {
   return (
     <View>
       <Text>Olá usuario: {user?.fullName}</Text>
+      <Text>Email: {user?.emailAddresses[0].emailAddress}</Text>
       <DefaultButton title='Sair' icon='exit' onPress={() => signOut()} />
     </View>
   );
