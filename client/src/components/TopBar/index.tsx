@@ -5,17 +5,20 @@ import ButtonUser from "./ButtonUser";
 import Logo from "../Logo";
 import LinksNavigations from "./LinksNavigation";
 import DateSelect from "../DateSelect";
+import LinksNavigationMobile from "./LinksNavigationMobile";
 
 const TopBar = () => {
   const { theme } = useTheme()
   return (
     <header className="border-b-2" key={theme} >
-      <div className="grid grid-cols-3  py-4 defaultWidth">
+      <div className="grid grid-cols-3 items-center py-4 defaultWidth">
         {/* Logo e links de navegaço */}
-        <div className="flex items-center gap-10">
+        <div className="items-center gap-10 hidden lg:flex">
           <Logo />
           <LinksNavigations />
         </div>
+        {/* Botão de menu mobile */}
+        <LinksNavigationMobile />
         {/* Configurar mes e ano / data */}
         <DateSelect />
         {/* Botão de ação do usuario */}

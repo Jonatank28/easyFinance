@@ -78,10 +78,10 @@ const DateSelect = () => {
   }, [searchParams])
 
   return (
-    <div className="flex justify-center">
-      <Popover open={isOpen} onOpenChange={setIsOpen}>
+    <div className="flex justify-center h-full">
+      <Popover open={isOpen} onOpenChange={setIsOpen} >
         <PopoverTrigger asChild>
-          {monthName ? <Button variant="outline">{monthName} - {year}</Button> : <Skeleton className="w-[147px] h-[36px] bg-accent" />}
+          {monthName ? <Button variant="outline">{monthName} - {year}</Button> : <Skeleton className="w-[149px] h-[40px] bg-accent" />}
         </PopoverTrigger>
         <PopoverContent className="w-80 p-0 rounded-xl">
           <div className="bg-primary flex items-center justify-between rounded-t-xl p-2">

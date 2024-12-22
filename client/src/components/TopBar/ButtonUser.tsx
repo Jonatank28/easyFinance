@@ -17,14 +17,14 @@ const ButtonUser = () => {
     <div className="flex justify-end">
       {!client ? (
         <div className="flex items-center gap-1">
-          <Skeleton className="w-32 h-5 bg-accent" />
+          <Skeleton className="w-32 h-5 bg-accent hidden lg:block" />
           <div className="w-7 h-7">
             <Skeleton className="w-full h-full rounded-full bg-accent" />
           </div>
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <p className="text-sm">{user?.fullName}</p>
+          <p className="text-sm hidden lg:block">{user?.fullName}</p>
           <div className="w-7 h-7">
             <UserButton>
               <UserButton.MenuItems>

@@ -1,25 +1,6 @@
+import { links } from "@/data/linksNavigation"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
-
-type LinksTypes = {
-  name: string,
-  route: string
-}
-
-const links: LinksTypes[] = [
-  {
-    name: "Dashboard",
-    route: "/dashboard"
-  },
-  {
-    name: "Transação",
-    route: "/transaction"
-  },
-  {
-    name: "Assinatura",
-    route: "/subscription"
-  }
-]
 
 const LinksNavigations = () => {
   const pathName = usePathname()
