@@ -56,24 +56,26 @@ const DateSelect = () => {
     if (paramYear && paramMonth) {
       setYear(paramYear)
       setMonth(paramMonth)
-      setMonthName(months[paramMonth - 1].fullLabel)
+      setMonthName(months[paramMonth - 1]?.fullLabel)
       router.push(`?year=${paramYear}&&month=${paramMonth}`)
+      console.log("paramYear && paramMonth")
     } else {
       if (!paramYear) {
         setYear(currentYear)
         setMonth(paramMonth)
-        setMonthName(months[paramMonth - 1].fullLabel)
+        setMonthName(months[paramMonth - 1]?.fullLabel)
         router.push(`?year=${currentYear}&&month=${paramMonth}`)
+        console.log("!paramYear")
       } else {
         setYear(paramYear)
         setMonth(currentMonth)
-        setMonthName(months[currentMonth - 1].fullLabel)
+        setMonthName(months[currentMonth - 1]?.fullLabel)
         router.push(`?year=${paramYear}&&month=${currentMonth}`)
+        console.log("paramYear")
       }
     }
 
   }, [searchParams])
-
 
   return (
     <div className="flex justify-center">

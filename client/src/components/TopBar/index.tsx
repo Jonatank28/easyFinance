@@ -9,7 +9,7 @@ import DateSelect from "../DateSelect";
 const TopBar = () => {
   const { theme } = useTheme()
   return (
-    <header className="border-b-2" key={theme}>
+    <header className="border-b-2" key={theme} >
       <div className="grid grid-cols-3  py-4 defaultWidth">
         {/* Logo e links de navegaço */}
         <div className="flex items-center gap-10">

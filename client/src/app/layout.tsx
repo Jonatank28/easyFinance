@@ -21,7 +21,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning cz-shortcut-listen="true">
+    <html lang="pt-BR" suppressHydrationWarning={true}>
       <body className={`${mulish.variable} font-sans antialiased`}>
         <Providers>
           <ClerkProviderTheme>
