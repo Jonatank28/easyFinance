@@ -2,10 +2,12 @@ import TopBar from "@/components/TopBar"
 
 const AuthRootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main>
+    <main className="h-screen">
       <TopBar />
-      {children}
-    </main>
+      <div className="h-full pt-[74px]">
+        {children}
+      </div>
+    </main >
   )
 }
 
