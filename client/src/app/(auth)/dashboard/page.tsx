@@ -1,14 +1,8 @@
-'use client'
-
-import { useUser } from "@clerk/nextjs";
-
-const index = () => {
-  const { user } = useUser()
-  console.log("🚀  user", user?.firstName);
+const index = async () => {
   return (
-    <main>
+    <div>
       <h1>Dashboard</h1>
-    </main>
+    </div>
   );
 };
 
