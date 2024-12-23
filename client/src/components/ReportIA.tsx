@@ -10,7 +10,7 @@ const ReportIA = () => {
 
   return (
     <>
-      <Button variant='ghost' className="rounded-xl font-bold" onClick={() => setIsOpen(!isOpen)}>
+      <Button variant='ghost' className="font-bold" onClick={() => setIsOpen(!isOpen)}>
         Relatótio IA
         <Bot />
       </Button>

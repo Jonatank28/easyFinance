@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { months } from "@/data/months"
-import { Skeleton } from "./ui/skeleton"
 
 
 const DateSelect = () => {
@@ -75,13 +74,13 @@ const DateSelect = () => {
       }
     }
 
-  }, [searchParams])
+  }, [searchParams, router])
 
   return (
     <div className="flex justify-center h-full">
       <Popover open={isOpen} onOpenChange={setIsOpen} >
         <PopoverTrigger asChild>
-          {monthName ? <Button variant="outline">{monthName} - {year}</Button> : <Skeleton className="w-[149px] h-[40px] bg-accent" />}
+          <Button variant="outline">{monthName} - {year}</Button>
         </PopoverTrigger>
         <PopoverContent className="w-80 p-0 rounded-xl">
           <div className="bg-primary flex items-center justify-between rounded-t-xl p-2">

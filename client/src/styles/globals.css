@@ -83,3 +83,28 @@ body {
     @apply mx-2 md:mx-8;
   }
 }
+
+/* Estilização básica da barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+/* Estilização do polegar da barra de rolagem */
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #222222; /* Cor do polegar da barra de rolagem */
+  border-radius: 5px; /* Borda arredondada do polegar da barra de rolagem */
+}
+/* Estilização do polegar da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #cccccc; /* Cor do polegar da barra de rolagem */
+  border-radius: 5px; /* Borda arredondada do polegar da barra de rolagem */
+}
+
+/* Estilização da trilha da barra de rolagem */
+.dark ::-webkit-scrollbar-track {
+  background-color: #414040; /* Cor da trilha da barra de rolagem */
+}
+/* Estilização da trilha da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #e6e5e5; /* Cor da trilha da barra de rolagem */
+}

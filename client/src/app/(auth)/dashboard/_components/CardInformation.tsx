@@ -1,3 +1,4 @@
+import ButtonAddTransaction from "@/components/ButtonAddTransaction"
 import { Card, CardContent } from "@/components/ui/card"
 import { Wallet, DollarSign, TrendingUp, TrendingDown } from "lucide-react"
 
@@ -6,6 +7,7 @@ type Types = "balance" | "invested" | "revenue" | "expense"
 interface Props {
   value: string
   type: Types
+  addTransaction?: boolean
 }
 
 const typeConfig = {
@@ -35,7 +37,7 @@ const typeConfig = {
   }
 }
 
-const CardInformation = ({ value, type }: Props) => {
+const CardInformation = ({ value, type, addTransaction }: Props) => {
   const { title, icon, bgIcon, sizeValue } = typeConfig[type]
 
   return (
@@ -45,8 +47,9 @@ const CardInformation = ({ value, type }: Props) => {
           <div className={`p-2 rounded-md ${bgIcon}`}>{icon}</div>
           <p>{title}</p>
         </div>
-        <div>
+        <div className="flex items-center justify-between">
           <h1 className={`${sizeValue} font-bold`}>R$ {value}</h1>
+          {addTransaction && <ButtonAddTransaction />}
         </div>
       </CardContent>
     </Card>

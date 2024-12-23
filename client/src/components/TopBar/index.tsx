@@ -6,6 +6,7 @@ import Logo from "../Logo";
 import LinksNavigations from "./LinksNavigation";
 import DateSelect from "../DateSelect";
 import LinksNavigationMobile from "./LinksNavigationMobile";
+import { Suspense } from "react";
 
 const TopBar = () => {
   const { theme } = useTheme()
@@ -16,12 +17,18 @@ const TopBar = () => {
           {/* Logo e links de navegaço */}
           <div className="items-center gap-10 hidden lg:flex">
             <Logo />
-            <LinksNavigations />
+            <Suspense>
+              <LinksNavigations />
+            </Suspense>
           </div>
           {/* Botão de menu mobile */}
-          <LinksNavigationMobile />
+          <Suspense>
+            <LinksNavigationMobile />
+          </Suspense>
           {/* Configurar mes e ano / data */}
-          <DateSelect />
+          <Suspense>
+            <DateSelect />
+          </Suspense>
           {/* Botão de ação do usuario */}
           <ButtonUser />
         </div>

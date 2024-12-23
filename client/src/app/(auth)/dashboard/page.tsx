@@ -1,6 +1,5 @@
 import ReportIA from "@/components/ReportIA";
 import { Card, CardContent } from "@/components/ui/card";
-import { Wallet } from "lucide-react";
 import CardInformation from "./_components/CardInformation";
 
 const DashboardPage = async () => {
@@ -17,6 +16,7 @@ const DashboardPage = async () => {
           <CardInformation
             value='11,00'
             type="balance"
+            addTransaction
           />
           <div className="flex justify-between gap-4 ">
             <CardInformation

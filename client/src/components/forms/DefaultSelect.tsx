@@ -33,7 +33,9 @@ const DefaultSelect = ({ form, label, name, options, onChange, placeholder }: Pr
       name={name}
       render={({ field }) => (
         <FormItem className="relative">
-          <FormLabel>{label}</FormLabel>
+          <div className="pb-1">
+            <FormLabel>{label}</FormLabel>
+          </div>
           <Select
             onValueChange={(value) => {
               field.onChange(value);
@@ -47,7 +49,7 @@ const DefaultSelect = ({ form, label, name, options, onChange, placeholder }: Pr
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {options.map((option, index) => (
+              {options.map((option) => (
                 <SelectItem
                   key={option.key}
                   value={option.key}
@@ -57,7 +59,7 @@ const DefaultSelect = ({ form, label, name, options, onChange, placeholder }: Pr
               ))}
             </SelectContent>
           </Select>
-          <FormMessage className="absolute -bottom-4 text-xs left-0" />
+          <FormMessage />
         </FormItem>
       )}
     />

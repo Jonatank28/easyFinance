@@ -19,15 +19,17 @@ interface Props {
 
 const DefaultModal = ({ open, title, onClose, children, footer, description }: Props) => {
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+    <Dialog open={open} onOpenChange={onClose} modal>
+      <DialogContent className="max-h-[90vh] flex flex-col px-2 md:px-6">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
             {description}
           </DialogDescription>
         </DialogHeader>
-        {children}
+        <div className="flex-grow overflow-y-auto px-2 pb-2">
+          {children}
+        </div>
         <DialogFooter>
           {footer}
         </DialogFooter>

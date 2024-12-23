@@ -17,7 +17,7 @@ export default function Home() {
       router.replace('/login')
     }
 
-  }, [isLoaded, isSignedIn])
+  }, [isLoaded, isSignedIn, router])
 
   return null
 }
