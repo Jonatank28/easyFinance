@@ -33,23 +33,8 @@ const currencyToFloat = (value: string): number => {
   return parseFloat(numericString);
 };
 
-// ________________________________________________________________________________________________________________________________
-/**
- * Formata um número usando a formatação brasileira.
- * @param {number} number O número a ser formatado.
- * @returns {string} Uma string formatada.
- *
- * Exemplo:
- * Entrada: 1234567
- * Saída: "1.234.567"
- */
-const formatNumber = (number: number): string => {
-  return new Intl.NumberFormat("pt-BR").format(number);
-};
-
 // Exporta todas as funções auxiliares para uso em outros módulos
 export {
   floatToCurrency, // Converte um valor float para formato de moeda.
   currencyToFloat, // Converte uma string de moeda para float.
-  formatNumber, // Formata um número usando a formatação brasileira.
 };

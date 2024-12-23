@@ -19,8 +19,8 @@ const typeConfig = {
   },
   invested: {
     title: "Investido",
-    icon: <DollarSign size={16} />,
-    bgIcon: "bg-muted",
+    icon: <DollarSign size={16} color="blue" />,
+    bgIcon: "bg-blue-400/10",
     sizeValue: "text-2xl"
   },
   revenue: {

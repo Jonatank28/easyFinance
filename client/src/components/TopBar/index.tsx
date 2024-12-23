@@ -11,7 +11,7 @@ import { Suspense } from "react";
 const TopBar = () => {
   const { theme } = useTheme()
   return (
-    <div className="fixed top-0 w-full">
+    <div className="fixed top-0 w-full backdrop-blur-3xl lg:backdrop-filter-none">
       <header className="border-b-2" key={theme} >
         <div className="grid grid-cols-3 items-center py-4 defaultWidth">
           {/* Logo e links de navegaço */}
