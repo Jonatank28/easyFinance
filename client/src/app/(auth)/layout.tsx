@@ -4,7 +4,7 @@ const AuthRootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="h-screen">
       <TopBar />
-      <div className="h-full pt-[74px]">
+      <div className="h-full pt-[65px]">
         {children}
       </div>
     </main >

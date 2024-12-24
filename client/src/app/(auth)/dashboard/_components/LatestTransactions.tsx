@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { floatToCurrency } from "@/lib/functions"
+import { floatToCurrency, formatDate } from "@/lib/functions"
 import { TransactionTypeTypes } from "@/types/transactionType"
 import { Banknote } from "lucide-react"
 
-type LastTransactionsTYpes = {
+type LastTransactionsTypes = {
   id: number
   name: string
   value: number
@@ -11,7 +11,7 @@ type LastTransactionsTYpes = {
   data: Date
 }
 
-const data: LastTransactionsTYpes[] = [
+const data: LastTransactionsTypes[] = [
   { id: 1, name: "Arrumar carro", type: "invested", value: 1250.56, data: new Date() }, // Hoje
   { id: 2, name: "Investimento em ações", type: "expense", value: 500.00, data: new Date(new Date().setDate(new Date().getDate() - 1)) }, // Ontem
   { id: 3, name: "Investimento em criptomoedas", type: "revenue", value: 200.00, data: new Date(new Date().setDate(new Date().getDate() - 3)) }, // 3 dias atrás
@@ -51,47 +51,11 @@ const typeConfig = {
 }
 
 const LatestTransactions = () => {
-
-  function formatDate(date: Date): string {
-    const now = new Date();
-    const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 3600 * 24));
-
-    // Formatação da data completa
-    const options: Intl.DateTimeFormatOptions = {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    };
-
-    const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Segunda-feira, ...
-
-    // Se for "Hoje"
-    if (diffInDays === 0) {
-      return `Hoje - ${date.toLocaleString('pt-BR', options)}`;
-    }
-
-    // Se for "Ontem"
-    if (diffInDays === 1) {
-      return `Ontem - ${date.toLocaleString('pt-BR', options)}`;
-    }
-
-    // Se a data for antes do domingo da semana atual, exibe o nome do dia
-    if (diffInDays < dayOfWeek) {
-      return `${date.toLocaleString('pt-BR', { weekday: 'long' }).toUpperCase()} - ${date.toLocaleString('pt-BR', options).split(',')[1].trim()}`;
-    }
-
-    // Caso contrário, exibe a data completa
-    return date.toLocaleString('pt-BR', options);
-  }
-
   return (
     <Card>
       <CardContent className="p-4">
-        <h1 className="text-2xl font-bold">Últimas transações</h1>
-        <div className="space-y-4 lg:h-[76vh] lg:overflow-y-auto pt-10">
+        <h1 className="text-2xl font-bold pb-4">Gastos por categoria</h1>
+        <div className="pt-6 space-y-4 lg:overflow-y-auto lg:h-[calc(100vh-223px)]">
           {data.map((item) => (
             <div key={item.id} className="flex items-center justify-between lg:pr-2">
               <div className="flex items-center gap-2">
@@ -103,7 +67,7 @@ const LatestTransactions = () => {
                   <p className="text-xs opacity-60">{formatDate(item.data)}</p>
                 </div>
               </div>
-              <p className={`${typeConfig[item.type].color}`}>{typeConfig[item.type].simbol} {floatToCurrency(item.value)}</p>
+              <p className={`${typeConfig[item.type].color} text-sm`}>{typeConfig[item.type].simbol} {floatToCurrency(item.value)}</p>
             </div>
           ))}
         </div>
