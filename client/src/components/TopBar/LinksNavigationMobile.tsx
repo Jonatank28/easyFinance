@@ -21,7 +21,7 @@ const LinksNavigationMobile = () => {
           <AlignJustify />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col">
+      <PopoverContent className="flex flex-col z-50">
         {links.map((link) => (
           <Link
             className={`${pathName === link.route ? "font-bold text-primary" : "text-muted-foreground hover:bg-accent hover:text-white"} rounded-sm px-3 py-1 `}
