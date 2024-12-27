@@ -64,7 +64,7 @@ const LatestTransactions = () => {
                 </div>
                 <div>
                   <p className="text-sm">{item.name}</p>
-                  <p className="text-xs opacity-60">{formatDate(item.data)}</p>
+                  <p className="text-xs text-black/40 dark:text-white/40">{formatDate(item.data)}</p>
                 </div>
               </div>
               <p className={`${typeConfig[item.type].color} text-sm`}>{typeConfig[item.type].simbol} {floatToCurrency(item.value)}</p>

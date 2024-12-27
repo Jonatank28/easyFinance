@@ -71,7 +71,7 @@ const SpendingCategory = () => {
                 <p className="text-xs">{item.name}</p>
                 <p className="text-xs">{item.value}%</p>
               </div>
-              <div className="h-2 bg-muted rounded-full relative lg:mr-2">
+              <div className="h-2 bg-muted rounded-full relative lg:mr-2 -z-10">
                 <div
                   className={`absolute inset-0 rounded-full ${colors[index % colors.length]}`}
                   style={{ width: `${item.value}%` }}
