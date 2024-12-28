@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { Toaster } from "../ui/sonner"
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,6 +10,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       defaultTheme="system"
       enableSystem={false}
     >
+      <Toaster />
       {children}
     </NextThemesProvider>
   )

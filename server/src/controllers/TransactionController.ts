@@ -19,7 +19,7 @@ class TransactionController {
       const transaction = await TransactionService.create(data);
       res
         .status(201)
-        .json({ message: "Transaction created successfully", transaction });
+        .json({ message: "Transação criada com sucesso!", transaction });
     } catch (error: unknown) {
       handleError(error, res);
     }

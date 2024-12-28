@@ -11,8 +11,8 @@ const FormTransaction = ({ form }: { form: UseFormReturn<any> }) => {
       <form className="space-y-2">
         <DefaultInput
           form={form}
-          label="Nome"
-          name="name"
+          label="Descrição"
+          name="description"
         />
         <DefaultInput
           form={form}
