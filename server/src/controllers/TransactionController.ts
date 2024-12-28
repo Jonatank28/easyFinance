@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import TransactionService from "../services/TransactionService";
 import { TransactionCreateTypes } from "../types/TransactionCreate";
-import { transactionCreateSchema } from "../schema/TransactionCreate";
 import handleError from "../utils/handleError";
+import { transactionCreateSchema } from "../schema/TransactionShema";
 
 class TransactionController {
   async create(
@@ -16,7 +16,7 @@ class TransactionController {
       };
       transactionCreateSchema.parse(data);
 
-      const transaction = await TransactionService.createTransaction(data);
+      const transaction = await TransactionService.create(data);
       res
         .status(201)
         .json({ message: "Transaction created successfully", transaction });

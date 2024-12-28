@@ -1,17 +1,10 @@
-import Transaction from "../model/transactionModel";
+import TransactionRepository from "../repositories/TransactionRepository";
 import { TransactionCreateTypes } from "../types/TransactionCreate";
 
 class TransactionService {
-  async createTransaction(data: TransactionCreateTypes) {
+  async create(data: TransactionCreateTypes) {
     try {
-      const newTransaction = new Transaction({
-        ...data,
-      });
-
-      const savedTransaction = await newTransaction.save();
-
-      console.log("Transaction created:", savedTransaction);
-
+      const savedTransaction = await TransactionRepository.create(data);
       return savedTransaction;
     } catch (error) {
       throw error;

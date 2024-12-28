@@ -2,7 +2,7 @@ import { z } from "zod";
 import mongoose from "mongoose";
 import { TypeTransactionEnums } from "../enum/typeTransaction";
 
-export const transactionCreateSchema = z.object({
+const transactionCreateSchema = z.object({
   description: z
     .string()
     .min(1, { message: "A descrição é obrigatória." })
@@ -34,3 +34,5 @@ export const transactionCreateSchema = z.object({
     .number({ invalid_type_error: "O valor deve ser um número." })
     .min(0, { message: "O valor deve ser maior ou igual a 0." }),
 });
+
+export { transactionCreateSchema };
