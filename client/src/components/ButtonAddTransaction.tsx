@@ -53,6 +53,7 @@ const ButtonAddTransaction = () => {
     try {
       const res = await api.post('/transaction/create', formatData)
       toast.success(res.data.message)
+      onClose()
     } catch (error: unknown) {
       handleError(error)
     } finally {
