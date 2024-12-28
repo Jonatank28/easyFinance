@@ -2,7 +2,8 @@ import express from "express";
 import transactionController from "../controllers/TransactionController";
 
 const router = express.Router();
+const prefix = "/transaction";
 
-router.get("/create", transactionController.create);
+router.post(prefix + "/create", transactionController.create);
 
 export default router;

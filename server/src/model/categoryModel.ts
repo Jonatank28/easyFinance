@@ -1,10 +1,5 @@
 import mongoose from "mongoose";
-
-export enum CategoryType {
-  Expense = "expense", // Despesa
-  Revenue = "revenue", // Receita
-  Invested = "invested", // Investido
-}
+import { TypeTransactionEnums } from "../enum/typeTransaction";
 
 const CategorySchema = new mongoose.Schema({
   name: {
@@ -14,7 +9,7 @@ const CategorySchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: Object.values(CategoryType),
+    enum: Object.values(TypeTransactionEnums),
     required: true,
   },
 });

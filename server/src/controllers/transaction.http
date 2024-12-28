@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3333/api/transaction
+
+# @name create
+POST {{baseUrl}}/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "Compra de alimentos",
+  "type": "expense",
+  "categoryId": "676f5503dadab41557c740ae",
+  "date": "2024-12-27T00:00:00.000Z",
+  "value": 150.75
+}

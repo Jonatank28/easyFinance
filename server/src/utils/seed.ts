@@ -1,15 +1,16 @@
-import Category, { CategoryType } from "../model/categoryModel";
+import { TypeTransactionEnums } from "../enum/typeTransaction";
+import Category from "../model/categoryModel";
 
 const categories = [
-  { name: "Mercado", type: CategoryType.Expense },
-  { name: "Uber", type: CategoryType.Expense },
-  { name: "Internet", type: CategoryType.Expense },
-  { name: "Aluguel", type: CategoryType.Expense },
-  { name: "Netflix", type: CategoryType.Expense },
-  { name: "Salário", type: CategoryType.Revenue },
-  { name: "Freelancer", type: CategoryType.Revenue },
-  { name: "Investimento em Ações", type: CategoryType.Invested },
-  { name: "Investimento em CDB", type: CategoryType.Invested },
+  { name: "Mercado", type: TypeTransactionEnums.Expense },
+  { name: "Uber", type: TypeTransactionEnums.Expense },
+  { name: "Internet", type: TypeTransactionEnums.Expense },
+  { name: "Aluguel", type: TypeTransactionEnums.Expense },
+  { name: "Netflix", type: TypeTransactionEnums.Expense },
+  { name: "Salário", type: TypeTransactionEnums.Revenue },
+  { name: "Freelancer", type: TypeTransactionEnums.Revenue },
+  { name: "Investimento em Ações", type: TypeTransactionEnums.Invested },
+  { name: "Investimento em CDB", type: TypeTransactionEnums.Invested },
 ];
 
 export const seedData = async () => {

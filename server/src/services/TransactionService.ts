@@ -1,9 +1,20 @@
+import Transaction from "../model/transactionModel";
+import { TransactionCreateTypes } from "../types/TransactionCreate";
+
 class TransactionService {
-  async createTransaction(data: any) {
+  async createTransaction(data: TransactionCreateTypes) {
     try {
-      console.log("Transaction created:");
+      const newTransaction = new Transaction({
+        ...data,
+      });
+
+      const savedTransaction = await newTransaction.save();
+
+      console.log("Transaction created:", savedTransaction);
+
+      return savedTransaction;
     } catch (error) {
-      console.error("Error creating transaction:", error);
+      throw error;
     }
   }
 }
