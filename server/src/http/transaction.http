@@ -5,9 +5,10 @@ POST {{baseUrl}}/create HTTP/1.1
 Content-Type: application/json
 
 {
+  "userId": "user1",
   "description": "Compra de alimentos",
   "type": "expense",
-  "categoryId": "676f5503dadab41557c740ae",
+  "categoryId": "6770771cc17997f992afcac8",
   "date": "2024-12-27T00:00:00.000Z",
   "value": 150.75
 }

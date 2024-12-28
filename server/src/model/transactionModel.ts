@@ -4,6 +4,10 @@ import Category from "./categoryModel";
 
 const TransactionSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
@@ -40,6 +44,8 @@ const TransactionSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+TransactionSchema.index({ userId: 1, categoryId: 1, date: 1 });
 
 const Transaction = mongoose.model("Transaction", TransactionSchema);
 export default Transaction;

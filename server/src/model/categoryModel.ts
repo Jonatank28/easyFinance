@@ -1,11 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { TypeTransactionEnums } from "../enum/typeTransaction";
 
-const CategorySchema = new mongoose.Schema({
+export interface ICategory extends Document {
+  name: string;
+  type: TypeTransactionEnums;
+}
+
+const CategorySchema = new mongoose.Schema<ICategory>({
   name: {
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
   type: {
     type: String,
@@ -14,5 +20,5 @@ const CategorySchema = new mongoose.Schema({
   },
 });
 
-const Category = mongoose.model("Category", CategorySchema);
+const Category = mongoose.model<ICategory>("Category", CategorySchema);
 export default Category;

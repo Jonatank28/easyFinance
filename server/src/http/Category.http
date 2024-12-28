@@ -1,0 +1,6 @@
+@baseUrl = http://localhost:3333/api/category
+@userId = user_2qVVlDGin6xSOuFm7P5VOIoPMYi
+
+# @name getAllByUserId
+GET {{baseUrl}}/getAllByUserId/{{userId}} HTTP/1.1
+Content-Type: application/json

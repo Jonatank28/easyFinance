@@ -13,7 +13,7 @@ const categories = [
   { name: "Investimento em CDB", type: TypeTransactionEnums.Invested },
 ];
 
-export const seedData = async () => {
+export const seedDataCategories = async () => {
   try {
     for (const category of categories) {
       const categoryExists = await Category.findOne({ name: category.name });
@@ -22,8 +22,8 @@ export const seedData = async () => {
         await newCategory.save();
       }
     }
-    console.log("Data seeded successfully");
+    console.log("Seed Categories completed");
   } catch (error) {
-    console.error("Error seeding data:", error);
+    console.error("Error seeding categories:", error);
   }
 };

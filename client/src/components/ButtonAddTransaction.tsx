@@ -14,6 +14,7 @@ import { toast } from "sonner"
 import { handleError } from "@/utils/handleError"
 import useLoading from "@/hooks/useLoading"
 import ButtonSubmit from "./ButtonSubmit"
+import { useUser } from "@clerk/nextjs"
 
 const schema = z.object({
   description: z.string().min(1, { message: 'Campo obrigatório' }),
@@ -32,6 +33,7 @@ const schema = z.object({
 const ButtonAddTransaction = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { isLoading, startLoading, stopLoading } = useLoading()
+  const { user } = useUser()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
