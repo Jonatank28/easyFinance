@@ -10,16 +10,6 @@ class TransactionService {
       throw error;
     }
   }
-  async latestTransactions(userId: string) {
-    try {
-      const latestTransactions = await TransactionRepository.latestTransactions(
-        userId
-      );
-      return latestTransactions;
-    } catch (error) {
-      throw error;
-    }
-  }
 }
 
 export default new TransactionService();

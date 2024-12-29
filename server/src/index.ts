@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/database";
 import transactionRoutes from "./routes/transactionRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
+import dashboardRoutes from "./routes/dashboardRoutes";
 import { seedData } from "./seed";
 
 dotenv.config();
@@ -15,6 +16,7 @@ const prefix = "/api";
 
 app.use(prefix, transactionRoutes);
 app.use(prefix, categoryRoutes);
+app.use(prefix, dashboardRoutes);
 
 connectDB();
 seedData();

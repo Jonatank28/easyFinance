@@ -35,8 +35,4 @@ const transactionCreateSchema = z.object({
     .min(0, { message: "O valor deve ser maior ou igual a 0." }),
 });
 
-const latestTransactionsSchema = z.object({
-  userId: z.string().nonempty("userId deve ser uma string não vazia."),
-});
-
-export { transactionCreateSchema, latestTransactionsSchema };
+export { transactionCreateSchema };

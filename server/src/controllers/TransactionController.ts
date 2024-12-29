@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { TransactionCreateTypes } from "../types/TransactionCreate";
-import {
-  latestTransactionsSchema,
-  transactionCreateSchema,
-} from "../schema/TransactionShema";
+import { transactionCreateSchema } from "../schema/TransactionShema";
 import TransactionService from "../services/TransactionService";
 import handleError from "../utils/handleError";
 
@@ -24,23 +21,6 @@ class TransactionController {
       res
         .status(201)
         .json({ message: "Transação criada com sucesso!", transaction });
-    } catch (error: unknown) {
-      handleError(error, res);
-    }
-  }
-
-  // latest transactions
-  async latestTransactions(
-    req: Request<{ userId: string }, {}, {}>,
-    res: Response
-  ): Promise<void> {
-    const { userId } = req.params;
-    latestTransactionsSchema.parse({ userId });
-
-    const transactions = await TransactionService.latestTransactions(userId);
-    res.status(200).json(transactions);
-
-    try {
     } catch (error: unknown) {
       handleError(error, res);
     }

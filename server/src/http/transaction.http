@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3333/api/transaction
-@userId = user_2qVVlDGin6xSOuFm7P5VOIoPMYi
+@userId = user_2qVVlDGin6xSOuFm7P5VOIoPMYi 
 
 ### @name create
 POST {{baseUrl}}/create HTTP/1.1
@@ -13,8 +13,3 @@ Content-Type: application/json
   "date": "2024-12-27T00:00:00.000Z",
   "value": 150.75
 }
-
-
-### @name latestTransactions
-GET {{baseUrl}}/latestTransactions/{{userId}} HTTP/1.1
-Content-Type: application/json
