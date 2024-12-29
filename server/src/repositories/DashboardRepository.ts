@@ -1,5 +1,6 @@
 import Transaction from "../model/transactionModel";
-import { format } from "date-fns";
+import { format, parse, isValid, endOfMonth } from "date-fns";
+import { DashboardRequestTypes } from "../types/Dashboard";
 
 const calculateValues = (result: any[]) => {
   let revenue = 0;
@@ -26,8 +27,34 @@ const calculateValues = (result: any[]) => {
 };
 
 class DashboardRepository {
-  async latestTransactions(userId: string) {
-    const transactions = await Transaction.find({ userId })
+  validateDateInput(year: string, month: string) {
+    // Ajusta para lidar com inversões de valores
+    if (Number(year) < 1000) {
+      [year, month] = [month, year];
+    }
+
+    if (!year || !month || isNaN(Number(year)) || isNaN(Number(month))) {
+      throw new Error("Invalid year or month format");
+    }
+
+    const parsedDate = parse(`${year}-${month}-01`, "yyyy-MM-dd", new Date());
+    if (!isValid(parsedDate)) {
+      throw new Error("Invalid year or month format");
+    }
+    return parsedDate;
+  }
+
+  async latestTransactions(dataRequest: DashboardRequestTypes) {
+    const { userId, month, year } = dataRequest;
+
+    // Validação de datas
+    const startDate = this.validateDateInput(year, month);
+    const endDate = endOfMonth(startDate);
+
+    const transactions = await Transaction.find({
+      userId,
+      date: { $gte: startDate, $lte: endDate },
+    })
       .sort({ date: -1 })
       .limit(20)
       .select("description type date value")
@@ -42,9 +69,15 @@ class DashboardRepository {
     }));
   }
 
-  async spendingCategory(userId: string) {
+  async spendingCategory(dataRequest: DashboardRequestTypes) {
+    const { userId, month, year } = dataRequest;
+
+    // Validação de datas
+    const startDate = this.validateDateInput(year, month);
+    const endDate = endOfMonth(startDate);
+
     const result = await Transaction.aggregate([
-      { $match: { userId } },
+      { $match: { userId, date: { $gte: startDate, $lte: endDate } } },
       {
         $lookup: {
           from: "categories",
@@ -75,9 +108,15 @@ class DashboardRepository {
     }));
   }
 
-  async valuesInformation(userId: string) {
+  async valuesInformation(dataRequest: DashboardRequestTypes) {
+    const { userId, month, year } = dataRequest;
+
+    // Validação de datas
+    const startDate = this.validateDateInput(year, month);
+    const endDate = endOfMonth(startDate);
+
     const result = await Transaction.aggregate([
-      { $match: { userId } },
+      { $match: { userId, date: { $gte: startDate, $lte: endDate } } },
       { $group: { _id: "$type", total: { $sum: "$value" } } },
     ]);
 
@@ -91,38 +130,6 @@ class DashboardRepository {
       investment: investment.toFixed(2),
       balance: balance,
     };
-  }
-
-  async percentageType(userId: string) {
-    const result = await Transaction.aggregate([
-      { $match: { userId } },
-      { $group: { _id: "$type", total: { $sum: "$value" } } },
-    ]);
-
-    const { revenue, expense, investment } = calculateValues(result);
-
-    const totalSum = revenue + expense + investment;
-
-    return [
-      {
-        type: "revenue",
-        value: revenue.toFixed(2),
-        percentage:
-          totalSum > 0 ? ((revenue / totalSum) * 100).toFixed(2) : "0.00",
-      },
-      {
-        type: "expense",
-        value: expense.toFixed(2),
-        percentage:
-          totalSum > 0 ? ((expense / totalSum) * 100).toFixed(2) : "0.00",
-      },
-      {
-        type: "investment",
-        value: investment.toFixed(2),
-        percentage:
-          totalSum > 0 ? ((investment / totalSum) * 100).toFixed(2) : "0.00",
-      },
-    ];
   }
 }
 

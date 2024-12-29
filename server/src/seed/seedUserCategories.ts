@@ -2,7 +2,7 @@ import Category from "../model/categoryModel";
 import UserCategory from "../model/UserCategoryModel";
 
 // ID do usuário que receberá as categorias
-const userId = "user_2qVVlDGin6xSOuFm7P5VOIoPMYi";
+const userId = "user_2qtGOJ0U5rFqKz0QEqWU7THHnxE";
 
 export const seedUserCategories = async () => {
   try {

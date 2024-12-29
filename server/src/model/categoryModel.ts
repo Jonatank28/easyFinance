@@ -20,5 +20,7 @@ const CategorySchema = new mongoose.Schema<ICategory>({
   },
 });
 
+CategorySchema.index({ name: 1, type: 1 });
+
 const Category = mongoose.model<ICategory>("Category", CategorySchema);
 export default Category;

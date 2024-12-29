@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { TransactionCreateTypes } from "../types/TransactionCreate";
+import { TransactionCreateTypes } from "../types/Transaction";
 import { transactionCreateSchema } from "../schema/TransactionShema";
 import TransactionService from "../services/TransactionService";
 import handleError from "../utils/handleError";

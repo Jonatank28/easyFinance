@@ -2,16 +2,17 @@ import { Request, Response } from "express";
 import handleError from "../utils/handleError";
 import { getDataDashboardSchema } from "../schema/DashboardShema";
 import DashboardService from "../services/DashboardService";
+import { DashboardRequestTypes } from "../types/Dashboard";
 
 class dashboardController {
   async getDashboardData(
-    req: Request<{ userId: string }, {}, {}>,
+    req: Request<DashboardRequestTypes, {}, {}>,
     res: Response
   ) {
-    const { userId } = req.params;
-    getDataDashboardSchema.parse({ userId });
+    const { userId, month, year } = req.params;
+    getDataDashboardSchema.parse({ userId, month, year });
 
-    const result = await DashboardService.getDashboardData(userId);
+    const result = await DashboardService.getDashboardData(req.params);
     res.status(200).json(result);
     try {
     } catch (error: unknown) {

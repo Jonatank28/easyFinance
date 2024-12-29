@@ -5,7 +5,7 @@ const router = express.Router();
 const prefix = "/dashboard";
 
 router.get(
-  prefix + "/getDashboardData/:userId",
+  prefix + "/getDashboardData/:userId/:month/:year",
   DashboardController.getDashboardData
 );
 

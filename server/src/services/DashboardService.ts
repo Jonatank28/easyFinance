@@ -1,24 +1,23 @@
 import DashboardRepository from "../repositories/DashboardRepository";
+import { DashboardRequestTypes } from "../types/Dashboard";
 
 class DashboardService {
-  async getDashboardData(userId: string) {
+  async getDashboardData(dataRequest: DashboardRequestTypes) {
     try {
       const lastTransactions = await DashboardRepository.latestTransactions(
-        userId
+        dataRequest
       );
       const spendingCategory = await DashboardRepository.spendingCategory(
-        userId
+        dataRequest
       );
       const valuesInformation = await DashboardRepository.valuesInformation(
-        userId
+        dataRequest
       );
-      const percentageType = await DashboardRepository.percentageType(userId);
 
       return {
         lastTransactions,
         spendingCategory,
         valuesInformation,
-        percentageType,
       };
     } catch (error) {
       throw error;

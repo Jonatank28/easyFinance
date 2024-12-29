@@ -1,5 +1,5 @@
 import Transaction from "../model/transactionModel";
-import { TransactionCreateTypes } from "../types/TransactionCreate";
+import { TransactionCreateTypes } from "../types/Transaction";
 
 class TransactionRepository {
   async create(data: TransactionCreateTypes) {
