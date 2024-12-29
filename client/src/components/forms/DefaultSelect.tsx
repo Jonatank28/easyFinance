@@ -24,9 +24,10 @@ interface Props {
     key: string;
     label: string;
   }[];
+  disabled?: boolean
 }
 
-const DefaultSelect = ({ form, label, name, options, onChange, placeholder }: Props) => {
+const DefaultSelect = ({ form, label, name, options, onChange, placeholder, disabled }: Props) => {
   return (
     <FormField
       control={form.control}
@@ -37,6 +38,7 @@ const DefaultSelect = ({ form, label, name, options, onChange, placeholder }: Pr
             <FormLabel>{label}</FormLabel>
           </div>
           <Select
+            disabled={disabled}
             onValueChange={(value) => {
               field.onChange(value);
               if (onChange) onChange(value);

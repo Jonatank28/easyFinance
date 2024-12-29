@@ -4,8 +4,22 @@ import DefaultInput from "./forms/DefaultInput"
 import DefaultSelect from "./forms/DefaultSelect"
 import { transactionTypes } from "@/data/transactionTypes"
 import DefaultInpuDate from "./forms/DefaultInpuDate"
+import { TypesCategories } from "./ButtonAddTransaction"
 
-const FormTransaction = ({ form }: { form: UseFormReturn<any> }) => {
+interface Props {
+  form: UseFormReturn<any>
+  data: TypesCategories
+}
+
+const FormTransaction = ({ form, data }: Props) => {
+  const typeSelected = form.watch('type') as keyof TypesCategories;
+
+  const onChangeType = (value: string) => {
+    if (value) {
+      form.setValue('categoryId', '');
+    }
+  }
+
   return (
     <Form  {...form}>
       <form className="space-y-2">
@@ -14,18 +28,27 @@ const FormTransaction = ({ form }: { form: UseFormReturn<any> }) => {
           label="Descrição"
           name="description"
         />
+        <DefaultSelect
+          form={form}
+          label="Tipo"
+          name="type"
+          onChange={onChangeType}
+          options={transactionTypes}
+        />
+        <DefaultSelect
+          key={typeSelected}
+          disabled={!typeSelected}
+          form={form}
+          label="Categoria"
+          name="categoryId"
+          options={data[typeSelected] || []}
+        />
         <DefaultInput
           form={form}
           label="Valor"
           name="value"
           mask="currency"
           type="number"
-        />
-        <DefaultSelect
-          form={form}
-          label="Tipo"
-          name="type"
-          options={transactionTypes}
         />
         <DefaultInpuDate
           form={form}

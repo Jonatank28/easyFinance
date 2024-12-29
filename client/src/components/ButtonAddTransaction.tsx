@@ -15,6 +15,14 @@ import { handleError } from "@/utils/handleError"
 import useLoading from "@/hooks/useLoading"
 import ButtonSubmit from "./ButtonSubmit"
 import { useUser } from "@clerk/nextjs"
+import { SelectType } from "@/types/selectType"
+
+export interface TypesCategories {
+  expense: SelectType[]
+  revenue: SelectType[]
+  investment: SelectType[]
+}
+
 
 const schema = z.object({
   description: z.string().min(1, { message: 'Campo obrigatório' }),
@@ -25,6 +33,7 @@ const schema = z.object({
       message: 'O valor deve ser maior que 0',
     }),
   type: z.string().min(1, { message: 'Campo obrigatório' }),
+  categoryId: z.string().min(1, { message: 'Campo obrigatório' }),
   date: z.date({
     required_error: "Campo obrigatório",
   }),
@@ -32,7 +41,12 @@ const schema = z.object({
 
 const ButtonAddTransaction = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const { isLoading, startLoading, stopLoading } = useLoading()
+  const { startLoading, stopLoading } = useLoading()
+  const [TypesCategories, setTypesCategories] = useState<TypesCategories>({
+    expense: [],
+    revenue: [],
+    investment: [],
+  })
   const { user } = useUser()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -40,6 +54,7 @@ const ButtonAddTransaction = () => {
       description: '',
       value: 'R$ 0,00',
       type: '',
+      categoryId: '',
       date: new Date(),
     },
   })
@@ -48,14 +63,13 @@ const ButtonAddTransaction = () => {
     startLoading()
     const formatData = {
       ...data,
+      userId: user?.id,
       value: currencyToFloat(data.value),
-      categoryId: '676f5503dadab41557c740ae'
     }
-
     try {
       const res = await api.post('/transaction/create', formatData)
       toast.success(res.data.message)
-      onClose()
+      onClose(true)
     } catch (error: unknown) {
       handleError(error)
     } finally {
@@ -63,30 +77,31 @@ const ButtonAddTransaction = () => {
     }
   }
 
-  // {
-  //   "description": "Compra de alimentos",
-  //   "type": "expense",
-  //   "categoryId": "676f5503dadab41557c740ae",
-  //   "date": "2024-12-27T00:00:00.000Z",
-  //   "value": 150.75
-  // }
-
-  const onClose = () => {
+  const onClose = (lag?: boolean) => {
     setIsOpen(false)
-    form.reset()
+    if (lag) {
+      setTimeout(() => {
+        form.reset()
+      }, 500);
+    } else {
+      form.reset()
+    }
   }
 
-  // const getData = async () => {
-  //   try {
-  //     const res = await api.post('/transaction/create',)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  const getData = async () => {
+    try {
+      const res = await api.get(`/category/getAllByUserId/${user?.id}`)
+      setTypesCategories(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  // useEffect(() => {
-  //   getData()
-  // }, [isOpen])
+  useEffect(() => {
+    if (isOpen) {
+      getData()
+    }
+  }, [isOpen])
 
   return (
     <>
@@ -98,10 +113,10 @@ const ButtonAddTransaction = () => {
         title="Adicionar transação"
         description="Insira as informações da transação"
         open={isOpen}
-        onClose={onClose}
+        onClose={() => onClose()}
         footer={
           <div className="pt-4 space-x-2">
-            <Button variant='ghost' onClick={onClose}>
+            <Button variant='ghost' onClick={() => onClose()}>
               Fechar
             </Button>
             <ButtonSubmit
@@ -112,7 +127,7 @@ const ButtonAddTransaction = () => {
           </div>
         }
       >
-        <FormTransaction form={form} />
+        <FormTransaction form={form} data={TypesCategories} />
       </DefaultModal>
     </>
   )

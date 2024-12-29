@@ -1,15 +1,35 @@
 import UserCategory from "../model/UserCategoryModel";
+import { TypeTransactionEnums } from "../enum/typeTransaction";
+import { ICategory } from "../model/categoryModel";
+
+interface CategoryWithId {
+  key: string;
+  label: string;
+}
 
 class CategoryRepository {
   async getAllByUserId(userId: string) {
-    const userCategoriesByUserId = await UserCategory.find({ userId }).populate(
-      "categoryId"
-    );
+    const userCategoriesByUserId = await UserCategory.find({ userId })
+      .populate<{ categoryId: ICategory }>("categoryId")
+      .lean();
 
-    return userCategoriesByUserId.map((uc) => {
+    const categoriesByType: {
+      [key in TypeTransactionEnums]: CategoryWithId[];
+    } = {
+      [TypeTransactionEnums.Expense]: [],
+      [TypeTransactionEnums.Revenue]: [],
+      [TypeTransactionEnums.Invested]: [],
+    };
+
+    userCategoriesByUserId.forEach((uc) => {
       const { _id, name, type } = uc.categoryId;
-      return { id: _id, name, type };
+
+      if (categoriesByType[type]) {
+        categoriesByType[type].push({ key: _id.toString(), label: name });
+      }
     });
+
+    return categoriesByType;
   }
 }
 
