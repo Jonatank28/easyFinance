@@ -44,7 +44,7 @@ const DefaultInpuDate = ({ form, name, label }: Props) => {
                   )}
                 >
                   {field.value ? (
-                    format(field.value, "dd/MM/yyyy", { locale: ptBR })
+                    format(field.value, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })
                   ) : (
                     <span>Selecione uma data</span>
                   )}

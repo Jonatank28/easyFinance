@@ -1,11 +1,25 @@
+'use client'
+
 import ReportIA from "@/components/ReportIA";
 import CardInformation from "./_components/CardInformation";
 import LatestTransactions from "./_components/LatestTransactions";
-import ExpensesType from "./_components/ExpensesType";
 import SpendingCategory from "./_components/SpendingCategory";
+import useDashboard from "@/hooks/useDashboard";
+import { useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
+import { floatToCurrency } from "@/lib/functions";
 
-const DashboardPage = async () => {
-  return (
+const DashboardPage = () => {
+  const { user } = useUser()
+  const { getData, data } = useDashboard()
+
+  useEffect(() => {
+    if (user?.id) {
+      getData(user.id)
+    }
+  }, [user?.id, getData])
+
+  return (data &&
     <div className="defaultWidth">
       <div className="mt-6 flex justify-between">
         <h1 className="text-2xl font-bold">Dashboard</h1>
@@ -16,26 +30,25 @@ const DashboardPage = async () => {
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 py-2 ">
         <div className="grid grid-rows-[auto_auto_1fr] gap-4">
           <CardInformation
-            value='11,00'
+            value={floatToCurrency(data.valuesInformation.balance)}
             type="balance"
             addTransaction
           />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
             <CardInformation
-              value='00,00'
+              value={floatToCurrency(data.valuesInformation.investment)}
               type="invested"
             />
             <CardInformation
-              value='11,00'
+              value={floatToCurrency(data.valuesInformation.revenue)}
               type="revenue"
             />
             <CardInformation
-              value='11,00'
+              value={floatToCurrency(data.valuesInformation.expense)}
               type="expense"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4">
-            <ExpensesType />
+          <div>
             <SpendingCategory />
           </div>
         </div>

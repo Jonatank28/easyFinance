@@ -9,6 +9,14 @@
  */
 const formatDate = (date: Date): string => {
   const now = new Date();
+
+  // Definindo a data de hoje sem horas, minutos e segundos (apenas a data)
+  const todayStart = new Date(now.setHours(0, 0, 0, 0));
+
+  // Definindo a data de ontem sem horas, minutos e segundos (apenas a data)
+  const yesterdayStart = new Date(todayStart);
+  yesterdayStart.setDate(todayStart.getDate() - 1);
+
   const diffInDays = Math.floor(
     (now.getTime() - date.getTime()) / (1000 * 3600 * 24)
   );
@@ -23,19 +31,18 @@ const formatDate = (date: Date): string => {
     hour12: false,
   };
 
-  const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Segunda-feira, ...
-
   // Se for "Hoje"
-  if (diffInDays === 0) {
+  if (date >= todayStart) {
     return `Hoje - ${date.toLocaleString("pt-BR", options)}`;
   }
 
   // Se for "Ontem"
-  if (diffInDays === 1) {
+  if (date >= yesterdayStart && date < todayStart) {
     return `Ontem - ${date.toLocaleString("pt-BR", options)}`;
   }
 
   // Se a data for antes do domingo da semana atual, exibe o nome do dia
+  const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Segunda-feira, ...
   if (diffInDays < dayOfWeek) {
     return `${date
       .toLocaleString("pt-BR", { weekday: "long" })

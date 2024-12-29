@@ -16,6 +16,7 @@ import useLoading from "@/hooks/useLoading"
 import ButtonSubmit from "./ButtonSubmit"
 import { useUser } from "@clerk/nextjs"
 import { SelectType } from "@/types/selectType"
+import useDashboard from "@/hooks/useDashboard"
 
 export interface TypesCategories {
   expense: SelectType[]
@@ -48,6 +49,7 @@ const ButtonAddTransaction = () => {
     investment: [],
   })
   const { user } = useUser()
+  const { getData: getDataDashboard } = useDashboard()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -61,6 +63,9 @@ const ButtonAddTransaction = () => {
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
     startLoading()
+    if (!user) {
+      return toast.error('Usuário não encontrado')
+    }
     const formatData = {
       ...data,
       userId: user?.id,
@@ -69,6 +74,7 @@ const ButtonAddTransaction = () => {
     try {
       const res = await api.post('/transaction/create', formatData)
       toast.success(res.data.message)
+      getDataDashboard(user?.id)
       onClose(true)
     } catch (error: unknown) {
       handleError(error)

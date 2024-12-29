@@ -1,4 +1,5 @@
 import Transaction from "../model/transactionModel";
+import { format } from "date-fns";
 
 const calculateValues = (result: any[]) => {
   let revenue = 0;
@@ -36,7 +37,7 @@ class DashboardRepository {
       id: transaction._id,
       description: transaction.description,
       type: transaction.type,
-      date: transaction.date,
+      date: format(transaction.date, "yyyy-MM-dd HH:mm"),
       value: transaction.value,
     }));
   }

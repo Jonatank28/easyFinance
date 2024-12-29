@@ -48,7 +48,7 @@ const CardInformation = ({ value, type, addTransaction }: Props) => {
           <p>{title}</p>
         </div>
         <div className="flex items-center justify-between">
-          <h1 className={`${sizeValue} font-bold`}>R$ {value}</h1>
+          <h1 className={`${sizeValue} font-bold`}>{value}</h1>
           {addTransaction && <ButtonAddTransaction />}
         </div>
       </CardContent>
