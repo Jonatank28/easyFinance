@@ -1,7 +1,8 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Types } from "mongoose";
 import { TypeTransactionEnums } from "../enum/typeTransaction";
 
 export interface ICategory extends Document {
+  _id: Types.ObjectId;
   name: string;
   type: TypeTransactionEnums;
 }

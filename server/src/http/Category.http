@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3333/api/category
-@userId = user_2qVVlDGin6xSOuFm7P5VOIoPMYi
+@userId = user_2qtGOJ0U5rFqKz0QEqWU7THHnxE
 
 # @name getAllByUserId
 GET {{baseUrl}}/getAllByUserId/{{userId}} HTTP/1.1

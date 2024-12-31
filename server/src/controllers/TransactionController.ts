@@ -5,7 +5,6 @@ import TransactionService from "../services/TransactionService";
 import handleError from "../utils/handleError";
 
 class TransactionController {
-  // Create new transaction
   async create(
     req: Request<{}, {}, TransactionCreateTypes>,
     res: Response

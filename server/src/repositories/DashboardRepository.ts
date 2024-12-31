@@ -28,7 +28,6 @@ const calculateValues = (result: any[]) => {
 
 class DashboardRepository {
   validateDateInput(year: string, month: string) {
-    // Ajusta para lidar com inversões de valores
     if (Number(year) < 1000) {
       [year, month] = [month, year];
     }
@@ -47,7 +46,6 @@ class DashboardRepository {
   async latestTransactions(dataRequest: DashboardRequestTypes) {
     const { userId, month, year } = dataRequest;
 
-    // Validação de datas
     const startDate = this.validateDateInput(year, month);
     const endDate = endOfMonth(startDate);
 
@@ -72,7 +70,6 @@ class DashboardRepository {
   async spendingCategory(dataRequest: DashboardRequestTypes) {
     const { userId, month, year } = dataRequest;
 
-    // Validação de datas
     const startDate = this.validateDateInput(year, month);
     const endDate = endOfMonth(startDate);
 
@@ -111,7 +108,6 @@ class DashboardRepository {
   async valuesInformation(dataRequest: DashboardRequestTypes) {
     const { userId, month, year } = dataRequest;
 
-    // Validação de datas
     const startDate = this.validateDateInput(year, month);
     const endDate = endOfMonth(startDate);
 

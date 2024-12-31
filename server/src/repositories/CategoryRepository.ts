@@ -1,8 +1,8 @@
 import UserCategory from "../model/UserCategoryModel";
+import Category, { ICategory } from "../model/categoryModel";
 import { TypeTransactionEnums } from "../enum/typeTransaction";
-import { ICategory } from "../model/categoryModel";
 
-interface CategoryWithId {
+export interface SelectType {
   key: string;
   label: string;
 }
@@ -13,23 +13,50 @@ class CategoryRepository {
       .populate<{ categoryId: ICategory }>("categoryId")
       .lean();
 
-    const categoriesByType: {
-      [key in TypeTransactionEnums]: CategoryWithId[];
-    } = {
-      [TypeTransactionEnums.Expense]: [],
-      [TypeTransactionEnums.Revenue]: [],
-      [TypeTransactionEnums.Invested]: [],
-    };
+    const expense: SelectType[] = [];
+    const revenue: SelectType[] = [];
+    const investment: SelectType[] = [];
 
     userCategoriesByUserId.forEach((uc) => {
-      const { _id, name, type } = uc.categoryId;
+      const { categoryId } = uc;
+      const { _id, name, type } = categoryId;
 
-      if (categoriesByType[type]) {
-        categoriesByType[type].push({ key: _id.toString(), label: name });
+      const category: SelectType = { key: _id.toString(), label: name };
+
+      if (type === TypeTransactionEnums.Expense) {
+        expense.push(category);
+      } else if (type === TypeTransactionEnums.Revenue) {
+        revenue.push(category);
+      } else if (type === TypeTransactionEnums.Invested) {
+        investment.push(category);
       }
     });
 
-    return categoriesByType;
+    return { expense, revenue, investment };
+  }
+
+  async addCategoryToUser(userId: string, categoryId: string) {
+    try {
+      const userCategory = new UserCategory({
+        userId,
+        categoryId,
+      });
+
+      await userCategory.save();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findOrCreateCategory(name: string, type: string) {
+    let category = await Category.findOne({ name, type });
+
+    if (!category) {
+      category = new Category({ name, type });
+      await category.save();
+    }
+
+    return category;
   }
 }
 
