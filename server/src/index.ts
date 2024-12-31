@@ -5,6 +5,7 @@ import connectDB from "./config/database";
 import transactionRoutes from "./routes/transactionRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import dashboardRoutes from "./routes/dashboardRoutes";
+import userRoutes from "./routes/userRoutes";
 import { seedData } from "./seed";
 
 dotenv.config();
@@ -14,8 +15,9 @@ app.use(cors());
 app.use(express.json());
 const prefix = "/api";
 
-app.use(prefix, transactionRoutes);
+app.use(prefix, userRoutes);
 app.use(prefix, categoryRoutes);
+app.use(prefix, transactionRoutes);
 app.use(prefix, dashboardRoutes);
 
 connectDB();

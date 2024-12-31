@@ -42,7 +42,7 @@ interface DashboardState {
     valuesInformation: ValuesInformation;
     percentageType: PercentageType[];
   };
-  getData: (userId: string) => void;
+  getData: (userId: string, month: string, year: string) => void;
 }
 
 const useDashboard = create<DashboardState>((set) => ({
@@ -52,9 +52,9 @@ const useDashboard = create<DashboardState>((set) => ({
     , valuesInformation: { revenue: '', expense: '', investment: '', balance: '' }
     , percentageType: []
   },
-  getData: async (userId: string) => {
+  getData: async (userId: string, month: string, year: string) => {
     try {
-      const res = await api.get(`/dashboard/getDashboardData/${userId}`);
+      const res = await api.get(`/dashboard/getDashboardData/${userId}/${month}/${year}`);
       set({ data: res.data })
     } catch (error) {
       console.log(error)

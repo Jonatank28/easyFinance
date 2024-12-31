@@ -8,16 +8,20 @@ import useDashboard from "@/hooks/useDashboard";
 import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { floatToCurrency } from "@/lib/functions";
+import { useSearchParams } from "next/navigation";
 
 const DashboardPage = () => {
   const { user } = useUser()
+  const searchParams = useSearchParams()
+  const year = searchParams.get("year")
+  const month = searchParams.get("month")
   const { getData, data } = useDashboard()
 
   useEffect(() => {
-    if (user?.id) {
-      getData(user.id)
+    if (user?.id && month && year) {
+      getData(user.id, month, year)
     }
-  }, [user?.id, getData])
+  }, [user?.id, getData, month, year])
 
   return (data &&
     <div className="defaultWidth">
