@@ -4,14 +4,15 @@ import { Button } from "./ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { months } from "@/data/months"
 import useDashboard from "@/hooks/useDashboard"
 import { useUser } from "@clerk/nextjs"
+import useGetParams from "@/hooks/useGetParams"
 
 
 const DateSelect = () => {
-  const searchParams = useSearchParams()
+  const params = useGetParams()
   const router = useRouter()
   const { user } = useUser()
   const { getData } = useDashboard()
@@ -59,8 +60,8 @@ const DateSelect = () => {
     const currentYear = new Date().getFullYear()
     const currentMonth = new Date().getMonth() + 1
 
-    const paramYear = Number(searchParams.get('year'))
-    const paramMonth = Number(searchParams.get('month'))
+    const paramYear = Number(params.year)
+    const paramMonth = Number(params.month)
 
     if (paramYear && paramMonth) {
       setYear(paramYear)
@@ -83,7 +84,7 @@ const DateSelect = () => {
       }
     }
 
-  }, [searchParams, router])
+  }, [params, router])
 
   return (
     <div className="flex justify-center h-full">

@@ -6,22 +6,20 @@ import { floatToCurrency } from "@/lib/functions"
 import SpendingCategory from "./SpendingCategory"
 import LatestTransactions from "./LatestTransactions"
 import { useUser } from "@clerk/nextjs"
-import { useSearchParams } from "next/navigation"
 import useDashboard from "@/hooks/useDashboard"
 import { useAuth } from "@/hooks/useAuth"
 import { useEffect } from "react"
+import useGetParams from "@/hooks/useGetParams"
 
 const Body = () => {
   const { user } = useUser()
-  const searchParams = useSearchParams()
-  const year = searchParams.get("year")
-  const month = searchParams.get("month")
+  const params = useGetParams()
   const { getData, data } = useDashboard()
   const { setUser } = useAuth()
 
   useEffect(() => {
-    if (user?.id && month && parseInt(month) > 0 && year) {
-      getData(user.id, month, year)
+    if (user?.id && params.month && parseInt(params.month) > 0 && params.year) {
+      getData(user.id, params.month, params.year)
       const formatDataUser = {
         userId: user.id,
         name: user.fullName || "",
@@ -37,7 +35,7 @@ const Body = () => {
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <div className="flex items-center gap-2">
           <ReportIA />
-        </div>aaa
+        </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 py-2 ">
         <div className="grid grid-rows-[auto_auto_1fr] gap-4">

@@ -3,15 +3,14 @@ import { Button } from "../ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { links } from "@/data/linksNavigation"
 import Link from "next/link"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
+import useGetParams from "@/hooks/useGetParams"
 
 const LinksNavigationMobile = () => {
   const pathName = usePathname()
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const year = searchParams.get("year")
-  const month = searchParams.get("month")
+  const params = useGetParams()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
@@ -27,10 +26,10 @@ const LinksNavigationMobile = () => {
             className={`${pathName === link.route ? "font-bold text-primary" : "text-muted-foreground hover:bg-accent hover:text-white"} rounded-sm px-3 py-1 `}
             key={link.name}
             onClick={() => {
-              router.push(link.route + `?year=${year}&&month=${month}`)
+              router.push(link.route + `?year=${params.year}&&month=${params.month}`)
               setIsOpen(false)
             }}
-            href={link.route + `?year=${year}&&month=${month}`}
+            href={link.route + `?year=${params.year}&&month=${params.month}`}
           >
             {link.name}
           </Link>

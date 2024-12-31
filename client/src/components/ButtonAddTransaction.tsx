@@ -17,7 +17,7 @@ import ButtonSubmit from "./ButtonSubmit"
 import { useUser } from "@clerk/nextjs"
 import { SelectType } from "@/types/selectType"
 import useDashboard from "@/hooks/useDashboard"
-import { useSearchParams } from "next/navigation"
+import useGetParams from "@/hooks/useGetParams"
 
 export interface TypesCategories {
   expense: SelectType[]
@@ -50,9 +50,7 @@ const ButtonAddTransaction = () => {
     investment: [],
   })
   const { user } = useUser()
-  const searchParams = useSearchParams()
-  const year = searchParams.get("year")
-  const month = searchParams.get("month")
+  const params = useGetParams()
   const { getData: getDataDashboard } = useDashboard()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -78,8 +76,8 @@ const ButtonAddTransaction = () => {
     try {
       const res = await api.post('/transaction/create', formatData)
       toast.success(res.data.message)
-      if (user && month && year) {
-        getDataDashboard(user?.id, month, year)
+      if (user && params.month && params.year) {
+        getDataDashboard(user?.id, params.month, params.year)
       } else {
         toast.error('Falha ao atualizar dashboard')
       }
