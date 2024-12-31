@@ -2,8 +2,8 @@ import User from "../model/UserModel";
 import { UserCreateTypes } from "../types/User";
 
 class UserRepository {
-  async verifyExists(userId: string, email: string) {
-    const user = await User.findOne({ userId, email });
+  async verifyExists(userId: string) {
+    const user = await User.findOne({ userId });
 
     if (user) {
       return true;

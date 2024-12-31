@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import handleError from "../utils/handleError";
 import { userCreateSchema } from "../schema/UserShema";
 import UserService from "../services/UserService";
+import { UserCreateTypes } from "../types/User";
 
 class UserController {
-  async create(req: Request, res: Response) {
+  async create(req: Request<{}, {}, UserCreateTypes>, res: Response) {
     try {
       const data = req.body;
       userCreateSchema.parse(data);

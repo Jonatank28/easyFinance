@@ -1,4 +1,5 @@
 import DashboardRepository from "../repositories/DashboardRepository";
+import UserRepository from "../repositories/UserRepository";
 import { DashboardRequestTypes } from "../types/Dashboard";
 
 class DashboardService {
@@ -13,11 +14,13 @@ class DashboardService {
       const valuesInformation = await DashboardRepository.valuesInformation(
         dataRequest
       );
+      const existUser = await UserRepository.verifyExists(dataRequest.userId);
 
       return {
         lastTransactions,
         spendingCategory,
         valuesInformation,
+        existUser,
       };
     } catch (error) {
       throw error;
