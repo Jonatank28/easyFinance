@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { floatToCurrency } from "@/lib/functions";
 import { useSearchParams } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const DashboardPage = () => {
   const { user } = useUser()
@@ -16,10 +17,19 @@ const DashboardPage = () => {
   const year = searchParams.get("year")
   const month = searchParams.get("month")
   const { getData, data } = useDashboard()
+  const { setUser } = useAuth()
 
   useEffect(() => {
-    if (user?.id && month && year) {
+    if (user?.id && month && parseInt(month) > 0 && year) {
+      console.log("emtrou akiki", user.id, month, year)
       getData(user.id, month, year)
+      const formatDataUser = {
+        userId: user.id,
+        name: user.fullName || "",
+        email: user.emailAddresses[0].emailAddress,
+        photo: user.imageUrl
+      }
+      setUser(formatDataUser)
     }
   }, [user?.id, getData, month, year])
 

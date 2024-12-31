@@ -1,6 +1,7 @@
 import { api } from "@/config/api";
 import { TransactionTypeTypes } from "@/types/transactionType";
 import { create } from "zustand";
+import { useAuth } from "./useAuth";
 
 // Tipo para as transações individuais (lastTransactions)
 interface LastTransaction {
@@ -37,6 +38,7 @@ interface PercentageType {
 
 interface DashboardState {
   data: {
+    existUser: boolean
     lastTransactions: LastTransaction[];
     spendingCategory: SpendingCategory[];
     valuesInformation: ValuesInformation;
@@ -47,15 +49,20 @@ interface DashboardState {
 
 const useDashboard = create<DashboardState>((set) => ({
   data: {
+    existUser: false,
     lastTransactions: []
     , spendingCategory: []
     , valuesInformation: { revenue: '', expense: '', investment: '', balance: '' }
     , percentageType: []
   },
   getData: async (userId: string, month: string, year: string) => {
+    const { createUser } = useAuth.getState()
     try {
       const res = await api.get(`/dashboard/getDashboardData/${userId}/${month}/${year}`);
       set({ data: res.data })
+      if (!res.data.existUser) {
+        await createUser()
+      }
     } catch (error) {
       console.log(error)
     }
