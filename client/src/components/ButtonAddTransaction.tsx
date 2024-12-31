@@ -103,6 +103,7 @@ const ButtonAddTransaction = () => {
   }
 
   const getData = async () => {
+    console.log("chamou o get")
     try {
       const res = await api.get(`/category/getAllByUserId/${user?.id}`)
       setTypesCategories(res.data)

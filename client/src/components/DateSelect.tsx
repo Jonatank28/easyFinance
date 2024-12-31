@@ -6,11 +6,15 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { months } from "@/data/months"
+import useDashboard from "@/hooks/useDashboard"
+import { useUser } from "@clerk/nextjs"
 
 
 const DateSelect = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const { user } = useUser()
+  const { getData } = useDashboard()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [year, setYear] = useState<number>()
   const [month, setMonth] = useState<number>()
@@ -20,17 +24,21 @@ const DateSelect = () => {
     setMonth(value)
     setMonthName(months[value - 1].fullLabel)
     router.push(`?year=${year}&&month=${value}`)
+    if (!user) return
+    getData(user.id, String(value), String(year))
     setIsOpen(false)
   }
 
   const handleChangeYear = (type: 'increment' | 'decrement') => {
-    if (!year) return
+    if (!year || !user) return
     if (type === 'increment') {
       setYear(year + 1)
       router.push(`?year=${year + 1}&&month=${month}`)
+      getData(user.id, String(month), String(year + 1))
     } else {
       setYear(year - 1)
       router.push(`?year=${year - 1}&&month=${month}`)
+      getData(user.id, String(month), String(year + 1))
     }
   }
 
@@ -41,6 +49,8 @@ const DateSelect = () => {
     setMonth(currentMonth)
     setMonthName(months[currentMonth - 1].fullLabel)
     router.push(`?year=${currentYear}&&month=${currentMonth}`)
+    if (!user) return
+    getData(user.id, String(currentMonth), String(currentYear))
     setIsOpen(false)
   }
 
@@ -57,7 +67,6 @@ const DateSelect = () => {
       setMonth(paramMonth)
       setMonthName(months[paramMonth - 1]?.fullLabel)
       router.push(`?year=${paramYear}&&month=${paramMonth}`)
-      console.log("paramYear && paramMonth")
     } else {
       if (!paramYear) {
         setYear(currentYear)
