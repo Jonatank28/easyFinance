@@ -38,6 +38,7 @@ class TransactionRepository {
           description: 1,
           type: 1,
           category: "$category.name",
+          categoryId: "$categoryId",
           date: {
             $dateToString: { format: "%Y-%m-%d %H:%M", date: "$date" },
           },
