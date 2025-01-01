@@ -17,4 +17,4 @@ Content-Type: application/json
 }
 
 ### @name getAllByMonthAndYear
-GET {{baseUrl}}/transactions/byMonthAndYear/{{userId}}/{{month}}/{{year}} HTTP/1.1
+GET {{baseUrl}}/getAllByMonthAndYear/{{userId}}/{{month}}/{{year}} HTTP/1.1

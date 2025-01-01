@@ -2,6 +2,8 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Toaster } from "../ui/sonner"
+import ClerkProviders from "./ClerkProvider"
+import GetDataProviders from "./GetDataProviders"
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,7 +13,11 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       enableSystem={false}
     >
       <Toaster />
-      {children}
+      <ClerkProviders>
+        <GetDataProviders>
+          {children}
+        </GetDataProviders>
+      </ClerkProviders>
     </NextThemesProvider>
   )
 }

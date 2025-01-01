@@ -27,7 +27,7 @@ class TransactionController {
       handleError(error, res);
     }
   }
-  async getTransactionsByMonthAndYear(
+  async getAllByMonthAndYear(
     req: Request<{ userId: string; month: string; year: string }>,
     res: Response
   ): Promise<void> {

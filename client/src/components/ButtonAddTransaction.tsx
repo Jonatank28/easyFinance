@@ -51,7 +51,7 @@ const ButtonAddTransaction = () => {
   })
   const { user } = useUser()
   const params = useGetParams()
-  const { getData: getDataDashboard } = useDashboard()
+  const { getDataDashboard } = useDashboard()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {

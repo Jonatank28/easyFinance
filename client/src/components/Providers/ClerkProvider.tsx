@@ -4,7 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs"
 import { useTheme } from "next-themes";
 import { dark, experimental__simple } from "@clerk/themes"
 
-const ClerkProviderTheme = ({ children }: { children: React.ReactNode }) => {
+const ClerkProviders = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useTheme()
   return (
     <ClerkProvider
@@ -18,4 +18,4 @@ const ClerkProviderTheme = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default ClerkProviderTheme
+export default ClerkProviders

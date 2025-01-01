@@ -1,6 +1,12 @@
+import Link from "next/link"
+import DefaultIcon from "./DefaultIcon"
+
 const Logo = () => {
   return (
-    <h1 className="text-2xl font-bold">Logo</h1>
+    <Link href="/dashboard" className="flex items-center gap-2">
+      <DefaultIcon name="CircleDollarSign" size={20} color="#0d450e" />
+      <h1 className="text-xs">Easy Finance</h1>
+    </Link>
   )
 }
 

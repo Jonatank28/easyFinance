@@ -15,7 +15,7 @@ const DateSelect = () => {
   const params = useGetParams()
   const router = useRouter()
   const { user } = useUser()
-  const { getData } = useDashboard()
+  const { getDataDashboard } = useDashboard()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [year, setYear] = useState<number>()
   const [month, setMonth] = useState<number>()
@@ -26,7 +26,7 @@ const DateSelect = () => {
     setMonthName(months[value - 1].fullLabel)
     router.push(`?year=${year}&&month=${value}`)
     if (!user) return
-    getData(user.id, String(value), String(year))
+    getDataDashboard(user.id, String(value), String(year))
     setIsOpen(false)
   }
 
@@ -35,11 +35,11 @@ const DateSelect = () => {
     if (type === 'increment') {
       setYear(year + 1)
       router.push(`?year=${year + 1}&&month=${month}`)
-      getData(user.id, String(month), String(year + 1))
+      getDataDashboard(user.id, String(month), String(year + 1))
     } else {
       setYear(year - 1)
       router.push(`?year=${year - 1}&&month=${month}`)
-      getData(user.id, String(month), String(year + 1))
+      getDataDashboard(user.id, String(month), String(year + 1))
     }
   }
 
@@ -51,7 +51,7 @@ const DateSelect = () => {
     setMonthName(months[currentMonth - 1].fullLabel)
     router.push(`?year=${currentYear}&&month=${currentMonth}`)
     if (!user) return
-    getData(user.id, String(currentMonth), String(currentYear))
+    getDataDashboard(user.id, String(currentMonth), String(currentYear))
     setIsOpen(false)
   }
 
@@ -84,7 +84,7 @@ const DateSelect = () => {
       }
     }
 
-  }, [params, router])
+  }, [params.month, params.year, router])
 
   return (
     <div className="flex justify-center h-full">

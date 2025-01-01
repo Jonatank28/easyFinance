@@ -5,30 +5,10 @@ import CardInformation from "./CardInformation"
 import { floatToCurrency } from "@/lib/functions"
 import SpendingCategory from "./SpendingCategory"
 import LatestTransactions from "./LatestTransactions"
-import { useUser } from "@clerk/nextjs"
 import useDashboard from "@/hooks/useDashboard"
-import { useAuth } from "@/hooks/useAuth"
-import { useEffect } from "react"
-import useGetParams from "@/hooks/useGetParams"
 
 const Body = () => {
-  const { user } = useUser()
-  const params = useGetParams()
-  const { getData, data } = useDashboard()
-  const { setUser } = useAuth()
-
-  useEffect(() => {
-    if (user?.id && params.month && parseInt(params.month) > 0 && params.year) {
-      getData(user.id, params.month, params.year)
-      const formatDataUser = {
-        userId: user.id,
-        name: user.fullName || "",
-        email: user.emailAddresses[0].emailAddress,
-        photo: user.imageUrl
-      }
-      setUser(formatDataUser)
-    }
-  }, [user?.id, getData, setUser])
+  const { data } = useDashboard()
   return (
     <>
       <div className="mt-6 flex justify-between">
