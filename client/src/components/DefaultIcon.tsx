@@ -16,7 +16,7 @@ const DefaultIcon = ({ name = 'Home', size, color, className }: Props) => {
   if (!IconComponent) {
     return null;
   }
-  // @ts-ignore // Problema ao tipar o lucide
+  //@ts-expect-error // Problema ao tipar o lucide
   return <IconComponent size={size} color={color} className={className} />;
 };
 

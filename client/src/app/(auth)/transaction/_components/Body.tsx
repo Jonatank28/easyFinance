@@ -1,9 +1,9 @@
-import DefaultTable from "./DefaultTable"
+import TableTransactions from "./TableTransactions"
 
 const Body = () => {
   return (
     <div className="pt-4">
-      <DefaultTable />
+      <TableTransactions />
     </div>
   )
 }

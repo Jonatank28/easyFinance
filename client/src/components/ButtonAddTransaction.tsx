@@ -18,6 +18,7 @@ import { SelectType } from "@/types/selectType"
 import useDashboard from "@/hooks/useDashboard"
 import useGetParams from "@/hooks/useGetParams"
 import DefaultIcon from "./DefaultIcon"
+import useGetCategories from "@/hooks/useGetCategories"
 
 export interface TypesCategories {
   expense: SelectType[]
@@ -52,6 +53,7 @@ const ButtonAddTransaction = () => {
   const { user } = useUser()
   const params = useGetParams()
   const { getDataDashboard } = useDashboard()
+  const { getDataCategories } = useGetCategories()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -100,19 +102,12 @@ const ButtonAddTransaction = () => {
     }
   }
 
-  const getData = async () => {
-    console.log("chamou o get")
-    try {
-      const res = await api.get(`/category/getAllByUserId/${user?.id}`)
-      setTypesCategories(res.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   useEffect(() => {
     if (isOpen) {
-      getData()
+      const res = getDataCategories()
+      res.then((data) => {
+        setTypesCategories(data)
+      })
     }
   }, [isOpen])
 

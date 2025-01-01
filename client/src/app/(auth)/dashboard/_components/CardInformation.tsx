@@ -13,25 +13,25 @@ interface Props {
 const typeConfig = {
   balance: {
     title: "Saldo",
-    icon: <DefaultIcon nome="Wallet" size={16} />,
+    icon: <DefaultIcon name="Wallet" size={16} />,
     bgIcon: "bg-muted dark:bg-background",
     sizeValue: "text-3xl"
   },
   invested: {
     title: "Investido",
-    icon: <DefaultIcon nome="Wallet" size={16} color="blue" />,
+    icon: <DefaultIcon name="Wallet" size={16} color="blue" />,
     bgIcon: "bg-blue-400/10",
     sizeValue: "text-2xl"
   },
   revenue: {
     title: "Receita",
-    icon: <DefaultIcon nome="Wallet" size={16} color="green" />,
+    icon: <DefaultIcon name="Wallet" size={16} color="green" />,
     bgIcon: "bg-primary/10",
     sizeValue: "text-2xl"
   },
   expense: {
     title: "Despesa",
-    icon: <DefaultIcon nome="Wallet" size={16} color="red" />,
+    icon: <DefaultIcon name="Wallet" size={16} color="red" />,
     bgIcon: "bg-destructive/10",
     sizeValue: "text-2xl"
   }

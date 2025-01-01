@@ -23,14 +23,6 @@ const typeConfig = {
   }
 }
 
-const Icon = ({ type }: { type: keyof typeof typeConfig }) => {
-  const { color, simbol } = typeConfig[type]
-  return (
-    <p className={`${color} font-bold`}>{simbol}</p>
-  )
-}
-
-
 const LatestTransactions = () => {
   const { data } = useDashboard()
   const params = useGetParams()
