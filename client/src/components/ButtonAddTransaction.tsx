@@ -1,6 +1,5 @@
 'use client'
 
-import { ArrowUpDown } from "lucide-react"
 import { Button } from "./ui/button"
 import { useEffect, useState } from "react"
 import DefaultModal from "./DefaultModal"
@@ -18,6 +17,7 @@ import { useUser } from "@clerk/nextjs"
 import { SelectType } from "@/types/selectType"
 import useDashboard from "@/hooks/useDashboard"
 import useGetParams from "@/hooks/useGetParams"
+import DefaultIcon from "./DefaultIcon"
 
 export interface TypesCategories {
   expense: SelectType[]
@@ -120,7 +120,7 @@ const ButtonAddTransaction = () => {
     <>
       <Button onClick={() => setIsOpen(!isOpen)}>
         Adicionar transação
-        <ArrowUpDown />
+        <DefaultIcon name="ArrowUpDown" />
       </Button>
       <DefaultModal
         title="Adicionar transação"

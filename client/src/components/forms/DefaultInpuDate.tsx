@@ -1,7 +1,6 @@
 "use client"
 
 import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
 import { ptBR } from "date-fns/locale";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -14,6 +13,7 @@ import {
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
+import DefaultIcon from "../DefaultIcon";
 
 interface Props {
   form: UseFormReturn<any>
@@ -48,7 +48,7 @@ const DefaultInpuDate = ({ form, name, label }: Props) => {
                   ) : (
                     <span>Selecione uma data</span>
                   )}
-                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  <DefaultIcon name="CalendarIcon" className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>

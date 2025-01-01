@@ -1,6 +1,6 @@
 import ButtonAddTransaction from "@/components/ButtonAddTransaction"
+import DefaultIcon from "@/components/DefaultIcon"
 import { Card, CardContent } from "@/components/ui/card"
-import { Wallet, DollarSign, TrendingUp, TrendingDown } from "lucide-react"
 
 type Types = "balance" | "invested" | "revenue" | "expense"
 
@@ -13,25 +13,25 @@ interface Props {
 const typeConfig = {
   balance: {
     title: "Saldo",
-    icon: <Wallet size={16} />,
+    icon: <DefaultIcon nome="Wallet" size={16} />,
     bgIcon: "bg-muted dark:bg-background",
     sizeValue: "text-3xl"
   },
   invested: {
     title: "Investido",
-    icon: <DollarSign size={16} color="blue" />,
+    icon: <DefaultIcon nome="Wallet" size={16} color="blue" />,
     bgIcon: "bg-blue-400/10",
     sizeValue: "text-2xl"
   },
   revenue: {
     title: "Receita",
-    icon: <TrendingUp size={16} color="green" />,
+    icon: <DefaultIcon nome="Wallet" size={16} color="green" />,
     bgIcon: "bg-primary/10",
     sizeValue: "text-2xl"
   },
   expense: {
     title: "Despesa",
-    icon: <TrendingDown size={16} color="red" />,
+    icon: <DefaultIcon nome="Wallet" size={16} color="red" />,
     bgIcon: "bg-destructive/10",
     sizeValue: "text-2xl"
   }

@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import useDashboard from "@/hooks/useDashboard"
 import { floatToCurrency, formatDate } from "@/lib/functions"
-import { Banknote } from "lucide-react"
 import { useRouter } from "next/navigation"
 import useGetParams from "@/hooks/useGetParams"
+import DefaultIcon from "@/components/DefaultIcon"
 
 const typeConfig = {
   investment: {
@@ -21,6 +21,13 @@ const typeConfig = {
     color: "text-destructive",
     simbol: "-"
   }
+}
+
+const Icon = ({ type }: { type: keyof typeof typeConfig }) => {
+  const { color, simbol } = typeConfig[type]
+  return (
+    <p className={`${color} font-bold`}>{simbol}</p>
+  )
 }
 
 
@@ -41,7 +48,10 @@ const LatestTransactions = () => {
             <div key={index} className="flex items-center justify-between lg:pr-2">
               <div className="flex items-center gap-2">
                 <div className="bg-accent rounded-xl p-2">
-                  <Banknote size={18} />
+                  <DefaultIcon
+                    size={18}
+                    name="Banknote"
+                  />
                 </div>
                 <div>
                   <p className="text-sm">{item.description}</p>

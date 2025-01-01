@@ -1,9 +1,9 @@
 'use client'
 
-import { Bot } from "lucide-react"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import DefaultModal from "./DefaultModal"
+import DefaultIcon from "./DefaultIcon"
 
 const ReportIA = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -12,7 +12,7 @@ const ReportIA = () => {
     <>
       <Button variant='ghost' className="font-bold" onClick={() => setIsOpen(!isOpen)}>
         Relatótio IA
-        <Bot />
+        <DefaultIcon name="Bot" />
       </Button>
       <DefaultModal
         title="Relatótio IA"

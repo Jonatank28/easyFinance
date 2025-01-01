@@ -2,13 +2,13 @@
 
 import { Button } from "./ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { months } from "@/data/months"
 import useDashboard from "@/hooks/useDashboard"
 import { useUser } from "@clerk/nextjs"
 import useGetParams from "@/hooks/useGetParams"
+import DefaultIcon from "./DefaultIcon"
 
 
 const DateSelect = () => {
@@ -95,11 +95,11 @@ const DateSelect = () => {
         <PopoverContent className="w-80 p-0 rounded-xl">
           <div className="bg-primary flex items-center justify-between rounded-t-xl p-2">
             <Button variant="ghost" size="icon" onClick={() => handleChangeYear('decrement')}>
-              <ChevronLeft />
+              <DefaultIcon name="ChevronLeft" />
             </Button>
             <h1 className="text-white font-bold">{year}</h1>
             <Button variant="ghost" size="icon" onClick={() => handleChangeYear('increment')}>
-              <ChevronRight />
+              <DefaultIcon name="ChevronRight" />
             </Button>
           </div>
           <div className="grid grid-cols-4 gap-3 p-2 pt-4 justify-center">

@@ -1,6 +1,6 @@
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import DefaultIcon from "../DefaultIcon";
 
 const ButtonUser = () => {
   const { theme, setTheme } = useTheme()
@@ -15,7 +15,7 @@ const ButtonUser = () => {
             <UserButton.MenuItems>
               <UserButton.Action
                 label={theme === 'dark' ? 'Tema Claro' : 'Tema Escuro'}
-                labelIcon={theme === 'dark' ? <Sun size={12} /> : <Moon size={12} />}
+                labelIcon={theme === 'dark' ? <DefaultIcon name="Sun" size={12} /> : <DefaultIcon name="Moon" size={12} />}
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               />
             </UserButton.MenuItems>

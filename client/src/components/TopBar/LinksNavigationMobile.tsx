@@ -1,4 +1,3 @@
-import { AlignJustify } from "lucide-react"
 import { Button } from "../ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { links } from "@/data/linksNavigation"
@@ -6,6 +5,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import useGetParams from "@/hooks/useGetParams"
+import DefaultIcon from "../DefaultIcon"
 
 const LinksNavigationMobile = () => {
   const pathName = usePathname()
@@ -17,7 +17,7 @@ const LinksNavigationMobile = () => {
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" size="icon" className="flex lg:hidden">
-          <AlignJustify />
+          <DefaultIcon name="AlignJustify" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="flex flex-col z-50">
