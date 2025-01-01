@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { TransactionCreateTypes } from "../types/Transaction";
-import { transactionCreateSchema } from "../schema/TransactionShema";
+import {
+  transactionCreateSchema,
+  TransactionsByMonthAndYearSchema,
+} from "../schema/TransactionShema";
 import TransactionService from "../services/TransactionService";
 import handleError from "../utils/handleError";
 
@@ -20,6 +23,24 @@ class TransactionController {
       res
         .status(201)
         .json({ message: "Transação criada com sucesso!", transaction });
+    } catch (error: unknown) {
+      handleError(error, res);
+    }
+  }
+  async getTransactionsByMonthAndYear(
+    req: Request<{ userId: string; month: string; year: string }>,
+    res: Response
+  ): Promise<void> {
+    try {
+      const { userId, month, year } = req.params;
+      TransactionsByMonthAndYearSchema.parse({ userId, month, year });
+
+      const transactions = await TransactionService.getAllByMonthAndYear(
+        userId,
+        month,
+        year
+      );
+      res.status(200).json(transactions);
     } catch (error: unknown) {
       handleError(error, res);
     }

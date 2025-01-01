@@ -1,5 +1,7 @@
 @baseUrl = http://localhost:3333/api/transaction
-@userId = user_2qVVlDGin6xSOuFm7P5VOIoPMYi 
+@userId = user_2qdWYFfhKCMMVgpKTenvrGt7nGX 
+@month = 1
+@year = 2025
 
 ### @name create
 POST {{baseUrl}}/create HTTP/1.1
@@ -13,3 +15,6 @@ Content-Type: application/json
   "date": "2024-12-27T00:00:00.000Z",
   "value": 150.75
 }
+
+### @name getAllByMonthAndYear
+GET {{baseUrl}}/transactions/byMonthAndYear/{{userId}}/{{month}}/{{year}} HTTP/1.1

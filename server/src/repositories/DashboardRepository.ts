@@ -1,6 +1,7 @@
 import Transaction from "../model/transactionModel";
-import { format, parse, isValid, endOfMonth } from "date-fns";
+import { format } from "date-fns";
 import { DashboardRequestTypes } from "../types/Dashboard";
+import { validateDateInput, getEndOfMonth } from "../utils/dateUtils";
 
 const calculateValues = (result: any[]) => {
   let revenue = 0;
@@ -27,27 +28,11 @@ const calculateValues = (result: any[]) => {
 };
 
 class DashboardRepository {
-  validateDateInput(year: string, month: string) {
-    if (Number(year) < 1000) {
-      [year, month] = [month, year];
-    }
-
-    if (!year || !month || isNaN(Number(year)) || isNaN(Number(month))) {
-      throw new Error("Invalid year or month format");
-    }
-
-    const parsedDate = parse(`${year}-${month}-01`, "yyyy-MM-dd", new Date());
-    if (!isValid(parsedDate)) {
-      throw new Error("Invalid year or month format");
-    }
-    return parsedDate;
-  }
-
   async latestTransactions(dataRequest: DashboardRequestTypes) {
     const { userId, month, year } = dataRequest;
 
-    const startDate = this.validateDateInput(year, month);
-    const endDate = endOfMonth(startDate);
+    const startDate = validateDateInput(year, month);
+    const endDate = getEndOfMonth(startDate);
 
     const transactions = await Transaction.find({
       userId,
@@ -70,8 +55,8 @@ class DashboardRepository {
   async spendingCategory(dataRequest: DashboardRequestTypes) {
     const { userId, month, year } = dataRequest;
 
-    const startDate = this.validateDateInput(year, month);
-    const endDate = endOfMonth(startDate);
+    const startDate = validateDateInput(year, month);
+    const endDate = getEndOfMonth(startDate);
 
     const result = await Transaction.aggregate([
       { $match: { userId, date: { $gte: startDate, $lte: endDate } } },
@@ -108,8 +93,8 @@ class DashboardRepository {
   async valuesInformation(dataRequest: DashboardRequestTypes) {
     const { userId, month, year } = dataRequest;
 
-    const startDate = this.validateDateInput(year, month);
-    const endDate = endOfMonth(startDate);
+    const startDate = validateDateInput(year, month);
+    const endDate = getEndOfMonth(startDate);
 
     const result = await Transaction.aggregate([
       { $match: { userId, date: { $gte: startDate, $lte: endDate } } },

@@ -4,6 +4,7 @@ import { TypeTransactionEnums } from "../enum/typeTransaction";
 export interface ICategory extends Document {
   _id: Types.ObjectId;
   name: string;
+  icon: string;
   type: TypeTransactionEnums;
 }
 
@@ -13,6 +14,10 @@ const CategorySchema = new mongoose.Schema<ICategory>({
     required: true,
     trim: true,
     unique: true,
+  },
+  icon: {
+    type: String,
+    default: "icon-default",
   },
   type: {
     type: String,

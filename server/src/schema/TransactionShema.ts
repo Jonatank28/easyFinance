@@ -35,4 +35,10 @@ const transactionCreateSchema = z.object({
     .min(0, { message: "O valor deve ser maior ou igual a 0." }),
 });
 
-export { transactionCreateSchema };
+const TransactionsByMonthAndYearSchema = z.object({
+  userId: z.string().nonempty("userId deve ser uma string não vazia."),
+  month: z.string().nonempty("month deve ser uma string não vazia."),
+  year: z.string().nonempty("year deve ser uma string não vazia."),
+});
+
+export { transactionCreateSchema, TransactionsByMonthAndYearSchema };
