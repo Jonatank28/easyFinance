@@ -3,6 +3,8 @@
 @month = 1
 @year = 2025
 
+@transactionId = 677579ac17230828b5410491
+
 ### @name create
 POST {{baseUrl}}/create HTTP/1.1
 Content-Type: application/json
@@ -15,6 +17,21 @@ Content-Type: application/json
   "date": "2024-12-27T00:00:00.000Z",
   "value": 150.75
 }
+
+### @name update
+PUT {{baseUrl}}/update/{{transactionId}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "Compra de alimentos 2",
+  "type": "expense",
+  "categoryId": "6770771cc17997f992afcac8",
+  "date": "2024-12-27T00:00:00.000Z",
+  "value": 150.75
+}
+
+### @name delete 
+DELETE {{baseUrl}}/delete/{{transactionId}} HTTP/1.1
 
 ### @name getAllByMonthAndYear
 GET {{baseUrl}}/getAllByMonthAndYear/{{userId}}/{{month}}/{{year}} HTTP/1.1

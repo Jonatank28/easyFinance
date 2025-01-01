@@ -5,6 +5,7 @@ import DashboardService from "../services/DashboardService";
 import { DashboardRequestTypes } from "../types/Dashboard";
 
 class dashboardController {
+  // Get Data Dashboard by user, month and year
   async getDashboardData(
     req: Request<DashboardRequestTypes, {}, {}>,
     res: Response

@@ -5,6 +5,7 @@ import UserService from "../services/UserService";
 import { UserCreateTypes } from "../types/User";
 
 class UserController {
+  // Create new user
   async create(req: Request<{}, {}, UserCreateTypes>, res: Response) {
     try {
       const data = req.body;

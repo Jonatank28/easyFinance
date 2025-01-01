@@ -1,5 +1,8 @@
 import Transaction from "../model/transactionModel";
-import { TransactionCreateTypes } from "../types/Transaction";
+import {
+  TransactionCreateTypes,
+  TransactionUpdateTypes,
+} from "../types/Transaction";
 import { validateDateInput, getEndOfMonth } from "../utils/dateUtils";
 
 class TransactionRepository {
@@ -48,6 +51,18 @@ class TransactionRepository {
     ]);
 
     return transactions;
+  }
+
+  async findById(transactionId: string) {
+    return await Transaction.findById(transactionId);
+  }
+
+  async update(transactionId: string, data: TransactionUpdateTypes) {
+    await Transaction.findByIdAndUpdate(transactionId, data);
+  }
+
+  async delete(transactionId: string) {
+    await Transaction.findByIdAndDelete(transactionId);
   }
 }
 

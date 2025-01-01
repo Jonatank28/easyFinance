@@ -8,3 +8,5 @@ export interface TransactionCreateTypes {
   date: Date;
   value: number;
 }
+
+export type TransactionUpdateTypes = Omit<TransactionCreateTypes, "userId">;

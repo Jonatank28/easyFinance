@@ -4,6 +4,7 @@ import { CategoryGetAllByUserIdSchema } from "../schema/CategoryShema";
 import CategoryService from "../services/CategoryService";
 
 class CategoryController {
+  // Get all categories by user
   async getAllByUserId(
     req: Request<{ userId: string }, {}, {}>,
     res: Response

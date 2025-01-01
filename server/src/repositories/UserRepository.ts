@@ -11,6 +11,7 @@ class UserRepository {
       return false;
     }
   }
+
   async create(data: UserCreateTypes) {
     const newUser = new User(data);
     return await newUser.save();

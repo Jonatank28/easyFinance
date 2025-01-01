@@ -41,4 +41,28 @@ const TransactionsByMonthAndYearSchema = z.object({
   year: z.string().nonempty("year deve ser uma string não vazia."),
 });
 
-export { transactionCreateSchema, TransactionsByMonthAndYearSchema };
+const TransactionDeleteSchema = z.object({
+  transactionId: z
+    .string()
+    .nonempty("transactionId deve ser uma string não vazia."),
+});
+
+const TransactionUpdateSchema = () => {
+  const params = z.object({
+    transactionId: z
+      .string()
+      .nonempty("transactionId deve ser uma string não vazia."),
+  });
+  const body = z.object({
+    description: z.string(),
+  });
+
+  return { params, body };
+};
+
+export {
+  transactionCreateSchema,
+  TransactionsByMonthAndYearSchema,
+  TransactionDeleteSchema,
+  TransactionUpdateSchema,
+};

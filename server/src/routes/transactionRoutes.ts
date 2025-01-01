@@ -9,5 +9,7 @@ router.get(
   prefix + "/getAllByMonthAndYear/:userId/:month/:year",
   TransactionController.getAllByMonthAndYear
 );
+router.put(prefix + "/update/:transactionId", TransactionController.update);
+router.delete(prefix + "/delete/:transactionId", TransactionController.delete);
 
 export default router;
