@@ -13,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -35,6 +34,8 @@ import {
 } from "@/components/ui/table"
 import { useTransactions } from "@/hooks/useTransactions"
 import { floatToCurrency, formatDate } from "@/lib/functions"
+import { TransactionTypeTypes } from "@/types/transactionType"
+import DefaultIcon from "@/components/DefaultIcon"
 
 export type Payment = {
   id: string
@@ -54,7 +55,13 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "type",
     header: "Tipo",
-    cell: ({ row }) => <div>{row.getValue("type")}</div>,
+    cell: ({ row }) => {
+      const type = row.getValue("type") as TransactionTypeTypes
+      const formatType = type === "expense" ? "Despesa" : type === "revenue" ? "Receita" : "Investimento"
+      return (
+        <div> {formatType}</div>
+      )
+    },
   },
   {
     accessorKey: "category",
@@ -70,7 +77,7 @@ export const columns: ColumnDef<Payment>[] = [
         className="text-left"
       >
         Valor
-        <ArrowUpDown />
+        <DefaultIcon name="ArrowUpDown" />
       </Button>
     ),
     cell: ({ row }) => {
@@ -89,7 +96,7 @@ export const columns: ColumnDef<Payment>[] = [
         className="text-left"
       >
         Data
-        <ArrowUpDown />
+        <DefaultIcon name="ArrowUpDown" />
       </Button>
     ),
     cell: ({ row }) => {
@@ -108,7 +115,7 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
+              <DefaultIcon name="MoreHorizontal" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -128,7 +135,6 @@ const DefaultTable = () => {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
   const { data } = useTransactions()
-  console.log("🚀  data", data);
 
   const [pageIndex, setPageIndex] = React.useState(0)
   const [pageSize, setPageSize] = React.useState(10)
@@ -188,8 +194,9 @@ const DefaultTable = () => {
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Colunas <ChevronDown />
+            <Button variant="outline" className="ml-2 md:ml-auto">
+              <DefaultIcon name="ChevronDown" />
+              Colunas
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
