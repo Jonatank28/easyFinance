@@ -10,50 +10,29 @@
 const formatDate = (date: Date): string => {
   const now = new Date();
 
-  // Definindo a data de hoje sem horas, minutos e segundos (apenas a data)
   const todayStart = new Date(now.setHours(0, 0, 0, 0));
 
-  // Definindo a data de ontem sem horas, minutos e segundos (apenas a data)
   const yesterdayStart = new Date(todayStart);
   yesterdayStart.setDate(todayStart.getDate() - 1);
 
-  const diffInDays = Math.floor(
-    (now.getTime() - date.getTime()) / (1000 * 3600 * 24)
-  );
-
-  // Formatação da data completa
   const options: Intl.DateTimeFormatOptions = {
     day: "2-digit",
     month: "2-digit",
     year: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
   };
 
-  // Se for "Hoje"
   if (date >= todayStart) {
     return `Hoje - ${date.toLocaleString("pt-BR", options)}`;
   }
 
-  // Se for "Ontem"
   if (date >= yesterdayStart && date < todayStart) {
     return `Ontem - ${date.toLocaleString("pt-BR", options)}`;
   }
 
-  // Se a data for antes do domingo da semana atual, exibe o nome do dia
-  const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Segunda-feira, ...
-  if (diffInDays < dayOfWeek) {
-    return `${date
-      .toLocaleString("pt-BR", { weekday: "long" })
-      .toUpperCase()} - ${date
-      .toLocaleString("pt-BR", options)
-      .split(",")[1]
-      .trim()}`;
-  }
-
-  // Caso contrário, exibe a data completa
-  return date.toLocaleString("pt-BR", options);
+  return `${
+    date.toLocaleString("pt-BR", { weekday: "long" }).charAt(0).toUpperCase() +
+    date.toLocaleString("pt-BR", { weekday: "long" }).slice(1)
+  } - ${date.toLocaleString("pt-BR", options)}`;
 };
 
 // ________________________________________________________________________________________________________________________________
