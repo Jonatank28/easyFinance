@@ -13,10 +13,22 @@ import { currencyToFloat, floatToCurrency } from "@/lib/functions";
 import { TypesCategories } from "@/components/ButtonAddTransaction";
 import useGetCategories from "@/hooks/useGetCategories";
 import FormTransaction from "@/components/FormTransaction";
+import { handleError } from "@/utils/handleError";
+import { api } from "@/config/api";
+import { toast } from "sonner";
+import useLoading from "@/hooks/useLoading";
+import useDashboard from "@/hooks/useDashboard";
+import { useTransactions } from "@/hooks/useTransactions";
+import { useUser } from "@clerk/nextjs";
+import useGetParams from "@/hooks/useGetParams";
 
 interface IsOpenTypes {
   open: boolean
   type: "edit" | "delete" | ""
+}
+
+interface FormData extends Omit<z.infer<typeof schema>, "value"> {
+  value: number;
 }
 
 const schema = z.object({
@@ -45,6 +57,11 @@ const Actions = ({ row }: { row: TransactionTypes }) => {
     investment: [],
   })
   const { getDataCategories } = useGetCategories()
+  const { startLoading, stopLoading } = useLoading()
+  const { user } = useUser()
+  const { month, year } = useGetParams()
+  const { getDataTransactions } = useTransactions()
+  const { getDataDashboard } = useDashboard()
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -73,8 +90,49 @@ const Actions = ({ row }: { row: TransactionTypes }) => {
     setIsOpen({ open: false, type: "" })
   }
 
-  const handleSubmit = () => {
+  const handleEdit = async (data: FormData) => {
+    try {
+      const res = await api.put(`/transaction/update/${row.id}`, data)
+      return res.data
+    } catch (error: unknown) {
+      throw error;
+    }
+  }
 
+  const handleDelete = async () => {
+    try {
+      const res = await api.delete(`/transaction/delete/${row.id}`)
+      return res.data
+    } catch (error: unknown) {
+      throw error;
+    }
+  }
+
+  const handleSubmit = async (data: z.infer<typeof schema>) => {
+    startLoading()
+    const formatData = {
+      ...data,
+      value: currencyToFloat(data.value),
+    }
+
+    try {
+      if (user && month && year) {
+        if (isOpen.type === "edit") {
+          const res = await handleEdit(formatData)
+          toast.success(res.message)
+        } else if (isOpen.type === "delete") {
+          const res = await handleDelete()
+          toast.success(res.message)
+        }
+        getDataTransactions(user.id, month, year)
+        getDataDashboard(user.id, month, year)
+      }
+    } catch (error: unknown) {
+      handleError(error)
+    } finally {
+      handleClose()
+      stopLoading()
+    }
   }
 
   useEffect(() => {
@@ -112,7 +170,7 @@ const Actions = ({ row }: { row: TransactionTypes }) => {
                 Fechar
               </Button>
               <ButtonSubmit
-                onClick={handleSubmit}
+                onClick={form.handleSubmit(handleSubmit)}
                 title={titleButtonSubmit}
                 titleLoading={titleButtonSubmitLoading}
               />

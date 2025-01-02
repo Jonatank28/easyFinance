@@ -15,6 +15,9 @@ const Pagination = ({ table, paginationWindow, setPageIndex }: PaginationProps) 
         {table.getFilteredRowModel().rows.length}
         {table.getFilteredRowModel().rows.length === 1 ? " registro" : " registros"}
       </div>
+      {/* <div className="text-sm text-muted-foreground">
+        <p>Saldo:</p>
+      </div> */}
       <div className="space-x-2">
         <Button
           variant="outline"

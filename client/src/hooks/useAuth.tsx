@@ -1,5 +1,5 @@
 import { api } from "@/config/api";
-import { UserCreateTypes } from "@/types/User";
+import { UserCreateTypes } from "@/types/user";
 import { create } from "zustand"
 
 interface AuthState {
