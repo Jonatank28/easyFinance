@@ -19,6 +19,7 @@ import useDashboard from "@/hooks/useDashboard"
 import useGetParams from "@/hooks/useGetParams"
 import DefaultIcon from "./DefaultIcon"
 import useGetCategories from "@/hooks/useGetCategories"
+import { useTransactions } from "@/hooks/useTransactions"
 
 export interface TypesCategories {
   expense: SelectType[]
@@ -53,6 +54,7 @@ const ButtonAddTransaction = () => {
   const { user } = useUser()
   const params = useGetParams()
   const { getDataDashboard } = useDashboard()
+  const { getDataTransactions } = useTransactions()
   const { getDataCategories } = useGetCategories()
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -80,6 +82,7 @@ const ButtonAddTransaction = () => {
       toast.success(res.data.message)
       if (user && params.month && params.year) {
         getDataDashboard(user?.id, params.month, params.year)
+        getDataTransactions(user?.id, params.month, params.year)
       } else {
         toast.error('Falha ao atualizar dashboard')
       }

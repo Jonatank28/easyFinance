@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
-import { Payment } from "@/types/payment"
+import { TransactionTypes } from "@/types/transaction"
 import { Table as ReactTable } from "@tanstack/react-table"
 
 interface PaginationProps {
-  table: ReactTable<Payment>
+  table: ReactTable<TransactionTypes>
   paginationWindow: number[]
   setPageIndex: React.Dispatch<React.SetStateAction<number>>
 }
@@ -15,9 +15,6 @@ const Pagination = ({ table, paginationWindow, setPageIndex }: PaginationProps) 
         {table.getFilteredRowModel().rows.length}
         {table.getFilteredRowModel().rows.length === 1 ? " registro" : " registros"}
       </div>
-      {/* <div className="text-sm text-muted-foreground">
-        <p>Saldo:</p>
-      </div> */}
       <div className="space-x-2">
         <Button
           variant="outline"

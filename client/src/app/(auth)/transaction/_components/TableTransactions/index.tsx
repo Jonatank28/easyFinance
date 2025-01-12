@@ -32,6 +32,7 @@ const DefaultTable = () => {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
   const { data } = useTransactions()
+  console.log("🚀  data", data);
 
   const [pageIndex, setPageIndex] = React.useState(0)
   const pageSize = 10

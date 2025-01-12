@@ -6,7 +6,6 @@ import { View, Text } from 'react-native';
 const home = () => {
   const { signOut } = useAuth()
   const { user } = useUser()
-  console.log("🚀  user", user);
   return (
     <View>
       <Text>Olá usuario: {user?.fullName}</Text>

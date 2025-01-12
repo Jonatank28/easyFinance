@@ -3,7 +3,7 @@ export const getPaginationWindow = (currentPage: number, pageCount: number) => {
   const halfWindow = Math.floor(windowSize / 2);
 
   let startPage = Math.max(currentPage - halfWindow, 0);
-  let endPage = Math.min(currentPage + halfWindow, pageCount - 1);
+  const endPage = Math.min(currentPage + halfWindow, pageCount - 1);
 
   if (endPage - startPage < windowSize - 1) {
     startPage = Math.max(endPage - windowSize + 1, 0);

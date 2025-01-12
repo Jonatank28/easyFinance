@@ -74,13 +74,11 @@ const DateSelect = () => {
         setMonth(paramMonth)
         setMonthName(months[paramMonth - 1]?.fullLabel)
         router.push(`?year=${currentYear}&&month=${paramMonth}`)
-        console.log("!paramYear")
       } else {
         setYear(paramYear)
         setMonth(currentMonth)
         setMonthName(months[currentMonth - 1]?.fullLabel)
         router.push(`?year=${paramYear}&&month=${currentMonth}`)
-        console.log("paramYear")
       }
     }
 

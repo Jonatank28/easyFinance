@@ -3,12 +3,12 @@ import { TransactionTypes } from "@/types/transaction";
 import { create } from "zustand";
 
 interface TransactionState {
-  data: TransactionTypes
+  data: TransactionTypes[]
   getDataTransactions: (userId: string, month: string, year: string) => void
 }
 
 export const useTransactions = create<TransactionState>((set) => ({
-  data: {} as TransactionTypes,
+  data: [],
   getDataTransactions: async (userId: string, month: string, year: string) => {
     try {
       const res = await api.get(`/transaction/getAllByMonthAndYear/${userId}/${month}/${year}`);

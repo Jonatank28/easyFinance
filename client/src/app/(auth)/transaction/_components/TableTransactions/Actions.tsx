@@ -75,7 +75,7 @@ const Actions = ({ row }: { row: TransactionTypes }) => {
   })
 
   const titleModal = isOpen.type === "edit" ? "Editar transação" : "Excluir transação"
-  const titleButtonSubmit = isOpen.type === "edit" ? "Salvar" : "Confirmar"
+  const titleButtonSubmit = isOpen.type === "edit" ? "Salvar" : "Excluir"
   const titleButtonSubmitLoading = isOpen.type === "edit" ? "Salvando..." : "Excluindo..."
 
   const handleOpen = (type: "edit" | "delete") => {
@@ -170,6 +170,7 @@ const Actions = ({ row }: { row: TransactionTypes }) => {
                 Fechar
               </Button>
               <ButtonSubmit
+                variant={isOpen.type === "delete" ? "destructive" : "default"}
                 onClick={form.handleSubmit(handleSubmit)}
                 title={titleButtonSubmit}
                 titleLoading={titleButtonSubmitLoading}

@@ -1,6 +1,6 @@
 import useGetParams from "@/hooks/useGetParams"
 import useDashboard from "@/hooks/useDashboard"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useAuth } from "@/hooks/useAuth"
 import { useUser } from "@clerk/nextjs"
 import { useTransactions } from "@/hooks/useTransactions"
@@ -13,9 +13,10 @@ const GetDataProviders = ({ children }: { children: React.ReactNode }) => {
   const { setUser } = useAuth()
   const { getDataDashboard } = useDashboard()
   const { getDataTransactions } = useTransactions()
+  const [count, setCount] = useState(0)
 
   const callsGets = () => {
-    if (!user || !params.month || !params.year) return
+    if (!user || !params.month || !params.year || count > 0) return
 
     if (pathName === "/dashboard") {
       getDataDashboard(user.id, params.month, params.year)
@@ -24,6 +25,7 @@ const GetDataProviders = ({ children }: { children: React.ReactNode }) => {
       getDataTransactions(user.id, params.month, params.year)
       getDataDashboard(user.id, params.month, params.year)
     }
+    setCount(count + 1)
   }
 
   useEffect(() => {

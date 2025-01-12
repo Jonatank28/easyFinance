@@ -3,10 +3,10 @@ import { Table as ReactTable } from "@tanstack/react-table"
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import DefaultIcon from "@/components/DefaultIcon"
-import { Payment } from "@/types/payment"
+import { TransactionTypes } from "@/types/transaction"
 
 interface Props {
-  table: ReactTable<Payment>
+  table: ReactTable<TransactionTypes>
 }
 
 const Filter = ({ table }: Props) => {

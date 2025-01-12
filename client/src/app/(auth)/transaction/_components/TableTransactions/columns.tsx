@@ -1,12 +1,12 @@
 import DefaultIcon from "@/components/DefaultIcon"
 import { Button } from "@/components/ui/button"
 import { floatToCurrency, formatDate } from "@/lib/functions"
-import { Payment } from "@/types/payment"
 import { TransactionTypeTypes } from "@/types/transactionType"
 import { ColumnDef } from "@tanstack/react-table"
 import Actions from "./Actions"
+import { TransactionTypes } from "@/types/transaction"
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<TransactionTypes>[] = [
   {
     accessorKey: "description",
     header: "Descrição",
@@ -70,8 +70,9 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Ações",
     enableHiding: false,
     cell: ({ row }) => {
+      const transaction = row.original
       return (
-        <Actions row={row.original} />
+        <Actions row={transaction} />
       )
     },
   },

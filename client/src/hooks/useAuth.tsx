@@ -14,8 +14,7 @@ export const useAuth = create<AuthState>((set, get) => ({
   createUser: async () => {
     const user = get().user
     try {
-      const createUser = await api.post('/user/create', user)
-      console.log("🚀  createUser", createUser);
+      await api.post('/user/create', user)
     } catch (error) {
       console.log(error)
     }

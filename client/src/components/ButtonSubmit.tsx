@@ -5,12 +5,14 @@ interface Props {
   title: string
   titleLoading?: string
   onClick: () => void
+  variant?: 'default' | 'destructive'
 }
 
-const ButtonSubmit = ({ title, titleLoading, onClick }: Props) => {
+const ButtonSubmit = ({ title, titleLoading, onClick, variant = 'default' }: Props) => {
   const { isLoading } = useLoading()
   return (
     <Button
+      variant={variant}
       onClick={onClick}
       disabled={isLoading}
     >
