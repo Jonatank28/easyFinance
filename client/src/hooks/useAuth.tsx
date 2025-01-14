@@ -1,6 +1,13 @@
 import { api } from "@/config/api";
 import { create } from "zustand"
-import { UserCreateTypes } from "../types/user";
+// import { UserCreateTypes } from "../types/user";
+
+export interface UserCreateTypes {
+  userId: string;
+  name: string;
+  email: string;
+  photo: string;
+}
 
 interface AuthState {
   user?: UserCreateTypes
