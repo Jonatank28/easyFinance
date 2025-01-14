@@ -16,4 +16,8 @@ export const links: LinksTypes[] = [
     name: "Assinatura",
     route: "/subscription",
   },
+  {
+    name: "Configurações",
+    route: "/settings",
+  },
 ];

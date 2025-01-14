@@ -40,7 +40,7 @@ const GetDataProviders = ({ children }: { children: React.ReactNode }) => {
       }
       setUser(formatDataUser)
     }
-  }, [user?.id, params.month, params.year, getDataDashboard, getDataTransactions, setUser, pathName])
+  }, [user?.id, params.month, params.year, setUser, pathName])
 
   return (
     <>
